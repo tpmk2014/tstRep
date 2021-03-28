@@ -1,3 +1,6 @@
 from django.db import models
 
-# Create your models here.
+
+class Product(models.Model):
+  name = models.CharField('Nazwa produktu', max_length=100)
+  caloric_content = models.CharField('Wartość kaloryczna na 100 g prodkuktu', max_length=10)
