@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from django.contrib.auth import logout
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.shortcuts import render, redirect
 
-# Create your views here.
+def login_view(request):
+  pass
+
+
+def registration_view(request):
+ pass
+
+def logout_view(request):
+    logout(request)
