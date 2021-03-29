@@ -10,9 +10,6 @@ app_name = 'pages'
 urlpatterns = [
     path('', views.index, name='home'),
     path('terms_of_service', views.staticpage, name='terms_of_service'),
-    path('contact', views.get_FAQ_question, name='contact'),
+    path('about_us', views.staticpage, name='about_us'),
 
 ]
-
-if settings.DEBUG: # new
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
