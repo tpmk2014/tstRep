@@ -7,6 +7,9 @@ def login_view(request):
   if request.method == 'POST':
     form = AuthenticationForm(data=request.POST)
     if form.is_valid():
+      user = form.get_user()
+      login(request, user)
+      context = {}
       return redirect('users:dashboard')
   else:
     form = AuthenticationForm()
@@ -18,7 +21,8 @@ def registration_view(request):
   if request.method == 'POST':
     form = UserCreationForm(request.POST)
     if form.is_valid():
-      form.save()
+      user = form.save()
+      login(request, user)
       return redirect('users:dashboard')
   else:
     form = UserCreationForm()
@@ -27,7 +31,9 @@ def registration_view(request):
 
 
 def logout_view(request):
+  if request.method == 'POST':
     logout(request)
+  return redirect('pages:index')
 
 
 def dashboard_view(request):
