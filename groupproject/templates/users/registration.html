@@ -4,7 +4,7 @@
 {% block content %}
 
 <h1>Rejestracja</h1>
-<form class="registration_form" action="/users/registration/" method="post">
+<form class="registration_form" action="{% url 'users:registration' %}" method="post">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Rejestracja">
