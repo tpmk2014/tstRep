@@ -1,10 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "pages/base_index.html" %}
+{% load static %}
 
-</body>
-</html>
+
+{% block meta_tags %}
+	<title>Dobra Kaloria - pomożemy ci </title>
+
+{% endblock %}
+
+{% block content %}
+
+<!--cities-->
+
+<section class="section">
+        <div class="container">
+          <header class="section-header">
+            <small>Miasta</small>
+            <h2>Wybierz kategorie</h2>
+            <hr>
+            <div class="row gap-y">
+
+
+              <div class="col-md-6 col-lg-3">
+                  <a class="btn btn-lg btn-round btn-success" href=""></a>
+              </div>
+
+
+          </div>
+          </header>
+        </div>
+      </section>
+
+<!--cities-->
+
+<!--licznik-->
+<section class="section text-white" style="background-color: #363636">
+        <div class="container">
+          <div class="row gap-y">
+
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-6">
+                  <h4 class="lead-7 text-right" data-provide="countup" data-from="0" data-to=""></h4>
+                </div>
+
+                <div class="col-6">
+                  <p class="small text-uppercase ls-2 mb-2">Użytkowników</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-6">
+                  <h4 class="lead-7 text-right" data-provide="countup" data-from="0" data-to=""></h4>
+                </div>
+
+                <div class="col-6">
+                  <p class="small text-uppercase ls-2 mb-2">Trenerów</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-6">
+                  <h4 class="lead-7 text-right" data-provide="countup" data-from="0" data-to="100" data-prefix="%"></h4>
+                </div>
+
+                <div class="col-6">
+                  <p class="small text-uppercase ls-2 mb-2">Satysfakcji</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+<!--licznik-->
+
+	  <!--FAQ-->
+	  <section class="section">
+        <div class="container">
+          <header class="section-header">
+            <small>Artykuły pomocnicze</small>
+          </header>
+               <div class="col-md-7 col-xl-8 mr-md-auto mx-auto py-8">
+                {% include "articles/articles.html" %}
+               </div>
+        </div>
+      </section>
+<!--FAQ-->
+
+{% endblock %}
