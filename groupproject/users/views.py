@@ -1,6 +1,7 @@
 from django.contrib.auth import logout, login
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 
 def login_view(request):
@@ -32,9 +33,10 @@ def registration_view(request):
 def logout_view(request):
   if request.method == 'POST':
     logout(request)
-  return redirect('pages:index')
+  return redirect('pages:home')
 
 
+@login_required
 def dashboard_view(request):
   dashboard_template = "users/dashboard.html"
   context = {}
