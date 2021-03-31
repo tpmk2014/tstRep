@@ -18,6 +18,33 @@
     <link href="http://thetheme.io/thesaas/assets/css/style.css">
   
   </head>
+   <nav class="navbar navbar-expand-lg navbar-light navbar-stick-dark" data-navbar="sticky">
+      <div class="container">
+
+        <div class="navbar-left">
+			<button class="navbar-toggler" type="button"><span class="navbar-toggler-icon"></span></button>
+			<a class="navbar-brand" href="{% url 'pages:home' %}">
+                <h1 class="logo-light" style="color:white;">Dobra Kaloria</h1>
+			</a>
+        </div>
+
+		  <section class="navbar-mobile">
+          <nav class="nav nav-navbar ml-auto p-2 ">
+              <a class="nav-link hide-middle" href = "{% url 'pages:about_us' %}" title="O naszym zespole" >O nas</a>
+              <a class="nav-link" href = "{% url 'pages:pricing' %}" >Cennik</a>
+              <div class="mt-3">
+                 {% if user.is_authenticated %}
+                     <a class="btn btn-sm btn-light ml-lg-5 mr-2" href="{% url 'users:logout' %} " >Wyloguj</a>
+                     <a class="btn btn-sm btn-light" href="{% url 'users:dashboard' %}">Twoje konto</a>
+                 {% else %}
+                     <a class="btn btn-sm ml-lg-5 mr-2" href="{% url 'users:login' %}" >Logowanie</a>
+                     <a class="btn btn-sm " href="{% url 'users:registration' %}" >Załóż konto</a>
+                 {% endif %}
+              </div>
+          </nav>
+        </section>
+      </div>
+    </nav>
     {% block content %}
 
 	{% endblock %}

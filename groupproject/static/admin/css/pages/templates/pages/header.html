@@ -1,0 +1,22 @@
+{% load static %}
+
+    <!-- Header -->
+      <header class="header text-white" style="background-image: url({% static 'pages/background_1.jpg' %})" data-overlay="8">
+        <div class="container text-center">
+
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+
+              <h1>Naucz się <span class="text-primary" data-typing="Aktorstwa, Gry w szachy, Pokera, Wystąpień publicznych"></span></h1>
+              <p class="lead-2 mt-5">Dołącz do nas i zarejestruj się. Jedynie to dzieli Cię od pierwszych, darmowych lekcji stworzonych przez profesjonalistów znanych w całej Polsce!</p>
+
+              <hr class="w-60px my-7">
+
+              <a class="btn btn-lg btn-round btn-primary" href="{% url 'courses:all_courses' %}">Zobacz kursy</a>
+
+            </div>
+          </div>
+
+        </div>
+      </header>
+    <!-- /.header -->
