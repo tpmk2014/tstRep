@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "users/base_index.html" %}
+{% load static %}
 
-</body>
-</html>
+
+{% block meta_tags %}
+	<title>Konto użytkownika</title>
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid " style="margin: 6% 0 0 0;">
+   <ul class="nav justify-content-center" style="font-size: 18px;">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Kalkulator BMI</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="#">Treningi</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="#">Moje Kalorie</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Zmiana hasła</a>
+      </li>
+    </ul>
+    <div style="min-height: 250px; opacity: 0.4;">
+        <h2 class="text-center mt-10">Prosze wybrać coś z lisy powyżej</h2>
+    </div>
+</div>
+{% endblock %}
