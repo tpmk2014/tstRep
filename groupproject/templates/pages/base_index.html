@@ -10,13 +10,13 @@
 		<title>Dobra Kaloria</title>
    {% endblock %}
 
-    <link href="{% static 'pages/front-lay/css/page.min.css' %}" rel="stylesheet">
-    <link href="{% static 'pages/front-lay/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'admin/css/page.min.css' %}" rel="stylesheet">
+    <link href="{% static 'admin/css/style.css' %}" rel="stylesheet">
 
     	<!-- Styles -->
     <link href="http://thetheme.io/thesaas/assets/css/page.min.css" rel="stylesheet">
     <link href="http://thetheme.io/thesaas/assets/css/style.css">
-  
+
   </head>
    <nav class="navbar navbar-expand-lg navbar-light navbar-stick-dark" data-navbar="sticky">
       <div class="container">
@@ -24,7 +24,7 @@
         <div class="navbar-left">
 			<button class="navbar-toggler" type="button"><span class="navbar-toggler-icon"></span></button>
 			<a class="navbar-brand" href="{% url 'pages:home' %}">
-                <h1 class="logo-light" style="color:white;">Dobra Kaloria</h1>
+                <h1 style="font-size: 35px;">Dobra Kaloria</h1>
 			</a>
         </div>
 
@@ -34,11 +34,11 @@
               <a class="nav-link" href = "{% url 'pages:pricing' %}" >Cennik</a>
               <div class="mt-3">
                  {% if user.is_authenticated %}
-                     <a class="btn btn-sm btn-light ml-lg-5 mr-2" href="{% url 'users:logout' %} " >Wyloguj</a>
-                     <a class="btn btn-sm btn-light" href="{% url 'users:dashboard' %}">Twoje konto</a>
+                     <a class="btn btn-sm btn-light ml-lg-5 mr-2" href="{% url 'users:logout' %} " style="background:#03DAC6; color: white;">Wyloguj</a>
+                     <a class="btn btn-sm btn-light" href="{% url 'users:dashboard' %}" style="background:#6200EE; color: white;">Twoje konto</a>
                  {% else %}
-                     <a class="btn btn-sm ml-lg-5 mr-2" href="{% url 'users:login' %}" >Logowanie</a>
-                     <a class="btn btn-sm " href="{% url 'users:registration' %}" >Załóż konto</a>
+                     <a class="btn btn-sm ml-lg-5 mr-2" href="{% url 'users:login' %}" style="background:#03DAC6; color: white;">Logowanie</a>
+                     <a class="btn btn-sm " href="{% url 'users:registration' %}" style="background:#6200EE; color: white;">Załóż konto</a>
                  {% endif %}
               </div>
           </nav>
