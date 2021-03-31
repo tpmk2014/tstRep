@@ -1,0 +1,111 @@
+{% extends "pages/base_index.html" %}
+{% load static %}
+
+    {% block meta_tags %}
+        <title>Travicon - cennik</title>
+        <meta name="description" content="Strona na której uczysz się od najlepszych" />
+        <meta name="keywords" content="e-learning, znani, popularni, najlepsi" />
+    {% endblock %}
+
+
+    {% block content %}
+    <!-- Header -->
+	<!-- Im not a great fan of the colour, might change it later -->
+    <header class="header text-white" style="background-image: url(../assets/img/thumb/14.jpg);">
+      <div class="overlay opacity-100" style="background-color: #33323a;"></div>
+      <div class="container text-center">
+
+        <div class="row">
+          <div class="col-md-8 mx-auto py-8">
+
+            <h1 class="display-41">Wybierz dla siebie najlepszy plan</h1>
+            <p class="lead-2 opacity-901 mt-6">Plany to takie zestawy usług. Wiesz, jak jesteś biznesem turystycznym to coś, a jak NGO, to coś innego.</p>
+
+          </div>
+        </div>
+
+      </div>
+    </header><!-- /.header -->
+      <section class="section bg-gray">
+        <div class="container">
+          <div class="row gap-y align-items-center">
+
+            <div class="col-md-4">
+              <p class="lead-7 text-dark fw-600 lh-2">Tak serio to mamy całkiem fajne te plany.</p>
+
+              <div class="btn-group btn-group-toggle my-7" data-toggle="buttons">
+                <label class="btn btn-round btn-outline-dark w-150">
+                  <input type="radio" name="pricing-6" value="monthly" autocomplete="off" > Miesięcznie
+                </label>
+                <label class="btn btn-round btn-outline-dark w-150 active">
+                  <input type="radio" name="pricing-6" value="yearly" autocomplete="off" checked=""> Rocznie
+                </label>
+              </div>
+
+              <p class="lead">Te ceny naprawdę łatwo da się zrozumieć. Transparentność i prostota to podstawa.</p>
+            </div>
+
+
+            <div class="col-md-7 ml-auto">
+              <div class="row gap-y">
+                <div class="col-md-6">
+                  <div class="card text-center shadow-1 hover-shadow-9">
+                    <div class="card-img-top text-white bg-img h-200 d-flex align-items-center" style="background-image: url(/static/pages/pricing-small.png)" data-overlay="1">
+                      <div class="position-relative w-100">
+                        <p class="lead-4 text-uppercase fw-600 ls-1 mb-0" style="color: white;">Tylko MY</p>
+                        <p><span data-bind-radio="pricing-6" data-monthly="Miesięczny" data-yearly="Roczny" style="color: white;">Roczny</span> pakiet</p>
+                      </div>
+                    </div>
+                    <div class="card-body py-6">
+                      <p class="lead-7 fw-600 text-dark">
+                        <span data-bind-radio="pricing-6" data-monthly="PLN 10." data-yearly="PLN 109.">PLN 109.</span><span class="lead-4 align-text-top">00<br><span data-bind-radio="pricing-6" data-monthly="+1% od transakcji" data-yearly="+0.9% od transakcji">+0.9% od transakcji</span></span></p>
+                      <p class="price_length">
+                        PayTo z funkcjami dla
+                        Twojej branży <br>
+                        200 płatności miesięcznie <br>
+                        Statystyki w panelu <br>
+                        Wsparcie udzielane
+                        do 12 godzin <br>
+                        <span data-bind-radio="pricing-6" data-monthly=" " data-yearly="Bezpłatny dostęp do API">Bezpłatny dostęp do API</span>
+                      </p>
+                      <br>
+                      <div><a class="btn btn-round btn-outline-secondary w-200" href="/accounts/signup/">Załóż konto</a></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="card text-center shadow-1 hover-shadow-9">
+                    <div class="card-img-top text-white bg-img h-200 d-flex align-items-center" style="background-image: url(/static/pages/pricing-big.jpg)" data-overlay="2">
+                      <div class="position-relative w-100">
+                        <p class="lead-4 text-uppercase fw-600 ls-1 mb-0">Ten lepszy</p>
+                        <p><span data-bind-radio="pricing-6" data-monthly="Miesięczny" data-yearly="Roczny">Roczny</span> pakiet</p>
+                      </div>
+                    </div>
+                    <div class="card-body py-6">
+                      <p class="lead-7 fw-600 text-dark">
+                        <span data-bind-radio="pricing-6" data-monthly="PLN 50." data-yearly="PLN 549.">PLN 549.</span><span class="lead-4 align-text-top">00<br><span data-bind-radio="pricing-6" data-monthly="+0.9% od transakcji" data-yearly="+0.8% od transakcji">+0.8% od transakcji</span></span>
+                      </p><p>
+                      PayTo z funkcjami dla
+                      Twojej branży
+                      Nieograniczona liczba
+                      płatności miesięcznie <br>
+                      Statystyki w panelu   <br>
+                      Wsparcie udzielane
+                      <span data-bind-radio="pricing-6" data-monthly="do 4 godzin" data-yearly="do 12 godzin">do 12 godzin</span>
+                      <span data-bind-radio="pricing-6" data-monthly=" " data-yearly="Bezpłatny dostęp do API">Bezpłatny dostęp do API</span><br>
+                      -15% na najlepszy terminal płatniczy na rynku<br>
+                      Dozgonna wdzięczność<br>
+                      Priorytetowe traktowanie
+                      <span data-bind-radio="pricing-6" data-monthly="" data-yearly=""></span>
+                      </p>
+                      <div><a class="btn btn-round btn-secondary w-200" href="/accounts/signup/">Załóż konto</a></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    {% endblock %}

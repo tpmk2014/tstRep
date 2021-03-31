@@ -1,0 +1,14 @@
+{% load static %}
+
+<!--galeria-->
+	  <section class="section py-0">
+        <div data-provide="slider" data-autoplay="true" data-slides-to-show="2" data-css-ease="linear" data-speed="12000" data-autoplay-speed="0" data-pause-on-hover="false">
+            {% for course in courses %}
+                <div class="p-2">
+                    <div class="rounded bg-img h-400" style="background-image: url({{ course.img.url }})"></div>
+                </div>
+            {% endfor %}
+        </div>
+      </section>
+
+<!--galeria-->

@@ -1,0 +1,48 @@
+{% extends "pages/base_index.html" %}
+{% load static %}
+
+
+{% block content %}
+	<main class="main-content">
+		<section class="section">
+			<div class="container">
+				<form class="row gap-y" action="../assets/php/sendmail.php" method="POST" data-form="mailer">
+					<div class="col-lg-7">
+						<h3>Skontaktuj się z nami</h3>
+						<br>
+						<div class="alert alert-success d-on-success">Dostaliśmy Twoją wiadomośc i postaramy się wkrótce odpowiedzieć!</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+							<input class="form-control form-control-lg" type="text" name="name" placeholder="Imie">
+							</div>
+							<div class="form-group col-md-6">
+							<input class="form-control form-control-lg" type="email" name="email" placeholder="Email">
+							</div>
+						</div>
+						<div class="form-group">
+						<textarea class="form-control form-control-lg" rows="4" placeholder="Wiadomość" name="message"></textarea>
+						</div>
+						<button class="btn btn-lg btn-primary" type="submit">Wyślij wiadomość</button>
+					</div>
+
+				<div class="col-lg-4 ml-auto text-center text-lg-left">
+					<hr class="d-lg-none">
+					<h3>Znajdź nas!</h3>
+					<br>
+					<p>2651 Main Street, Suit 124<br>Seattle, WA, 98101</p>
+					<p>+1 (321) 654 9870<br>+1 (987) 123 6548</p>
+					<p>hello@thetheme.io</p>
+					<div class="fw-400">Śledź nas</div>
+					<div class="social social-sm social-inline">
+						<a class="social-facebook" href="#"><i class="fa fa-facebook"></i></a>
+						<a class="social-instagram" href="#"><i class="fa fa-instagram"></i></a>
+				</div>
+				</div>
+			</form>
+			</div>
+		</section>
+
+
+
+	</main>
+{% endblock %}

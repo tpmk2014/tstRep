@@ -31,8 +31,7 @@ def registration_view(request):
 
 
 def logout_view(request):
-  if request.method == 'POST':
-    logout(request)
+  logout(request)
   return redirect('pages:home')
 
 

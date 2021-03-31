@@ -1,0 +1,31 @@
+{% load static %}
+
+{% block content %}
+   <section class="section py-10" style="background-image: url({% static 'pages/register.jpg' %})" data-overlay="7">
+
+        <div class="container">
+          <h2 class="text-white text-center">Darmowa rejestracja</h2>
+          <p class="text-white text-center opacity-70 lead">Zacznij naukę już dziś!</p>
+          <br>
+
+          <div class="row">
+            <form class="signup col-11 col-md-6 col-xl-5 mx-auto section-dialog bg-gray p-5 p-md-7 " id="signup_form" method="post" action="{% url 'account_signup' %}">
+                {% csrf_token %}
+                <label class="d-block">
+                {{form.as_p}}
+                </label>
+              <div>
+                  Klikając w poniższy przycisk oświadczam, że zapoznałem się z <a href="{% url 'pages:terms_of_service' %}">regulaminem</a> i <a href="{% url 'pages:privacy' %}" >polityką prywatności.</a>
+              </div>
+
+              <div class="text-center">
+                  <button class="btn btn-success mt-6" type="submit" id="signup_submit_button">Zarejestruj się</button>
+              </div>
+            </form>
+
+          </div>
+
+        </div>
+      </section>
+
+{% endblock %}

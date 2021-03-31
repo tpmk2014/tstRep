@@ -1,0 +1,229 @@
+{% extends "pages/base_index.html" %}
+{% load static %}
+
+
+{% block meta_tags %}
+	<title>Travicon</title>
+	
+	<meta name="description" content="Strona na której uczysz się od najlepszych" />
+	<meta name="keywords" content="e-learning, znani, popularni, najlepsi" />
+{% endblock %}
+
+{% block content %}
+
+	<!-- Header -->
+      <header class="header text-white" style="background-image: url({% static 'pages/background_1.jpg' %})" data-overlay="8">
+        <div class="container text-center">
+
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+
+              <h1>Naucz się <span class="text-primary" data-typing="Aktorstwa, Gry w szachy, Pokera, Wystąpień publicznych"></span></h1>
+              <p class="lead-2 mt-5">Dołącz do nas i zarejestruj się. Jedynie to dzieli Cię od pierwszych, darmowych lekcji stworzonych przez profesjonalistów znanych w całej Polsce!</p>
+
+              <hr class="w-60px my-7">
+
+              <a class="btn btn-lg btn-round btn-primary" href="{% url "courses:all_courses" %}">Zobacz kursy</a>
+
+            </div>
+          </div>
+
+        </div>
+      </header><!-- /.header -->
+
+	  <!--partners-->
+	  <section class="section py-6">
+        <div class="container">
+
+          <div class="partner partner-sm">
+		  
+			{% for logotype in logotypes %}
+			<img src="{{ logotype.img.url }}" alt="{{ logotype.name }}" ></i>
+			{% endfor %}
+          </div>
+
+        </div>
+      </section>
+ <!--partners-->
+
+	  <!--galeria-->
+
+    {% include 'pages/gallery.html' %}
+
+<!--galeria-->
+<!--category-->
+
+<section class="section">
+        <div class="container">
+          <header class="section-header">
+            <small>Kategorie</small>
+            <h2>Wybierz interesującą Cię kategorię</h2>
+            <hr>
+            <p class="lead">Ucz się od najlepszych</p>
+          </header>
+
+
+          <div class="row gap-y">
+
+            {% for c in categories %}
+            <div class="col-md-6 col-lg-3">
+              <a class="card text-white text-center bg-img py-6" href="{% url 'courses:cat_courses' c.slug %}" style="background-image: url({{ c.img.url }})" data-overlay="7">
+                <div class="position-relative">
+                  <i class="{{ c.icon }}"></i>
+                  <h5 class="mb-0">{{ c.name }}</h5>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+
+          </div>
+        
+        </div>
+      </section>
+
+<!--category-->
+<!--call_to_action-->
+<section class="section bg-repeat" style="background-image: url(../assets/img/bg/pattern-1.png)" data-overlay-light="5">
+        <div class="container">
+          <header class="section-header">
+            <h2 class="lead-8"><strong>5 Bezpłatnych Lekcji</strong></h2>
+            <hr>
+            <p class="lead-2">Wypróbuj nasz serwis i dołącz do najlepszych</p>
+          </header>
+
+          <p class="text-center">
+            <a class="btn btn-lg btn-success w-250" href="#">Wypróbuj teraz</a><br>
+            <small class="text-lighter">Twój e-mail będzie Twoim loginem</small>
+          </p>
+        </div>
+      </section>
+<!--cal_to_action-->
+
+      <!-- sample -->
+      <header class="header text-white h-fullscreen p-0 overflow-hidden" data-overlay="7">
+        <video class="bg-video" src="https://player.vimeo.com/video/{{ lesson.id }}" poster="{{ promoted_course.img.url }}" autoplay loop></video>
+
+        <div class="container text-center">
+
+          <div class="row h-100">
+            <div class="col-lg-8 mx-auto align-self-center pt-10">
+
+              <h1>{{ course.title }}</h1>
+              <p class="lead-2 mt-6 mb-8">Obejrzyj fragment kursu</p>
+              <p><a class="btn btn-lg btn-circle btn-light" href="https://player.vimeo.com/video/{{ lesson.id }}" data-provide="lightbox"><i class="fa fa-play"></i></a></p>
+              <br>
+              <p class="small">
+                <span class="opacity-60 mr-2">Lub</span>
+                <a class="mark-underline" href="#">Kup pełną wersję</a>
+              </p>
+
+            </div>
+
+            <div class="col-12 align-self-end text-center pb-7">
+              <a class="scroll-down-1 scroll-down-white" href="#section-next"><span></span></a>
+            </div>
+
+          </div>
+
+        </div>
+      </header>
+      <!-- sample-->
+
+<!--licznik-->
+<section class="section text-white" style="background-color: #363636">
+        <div class="container">
+          <div class="row gap-y">
+
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-6">
+                  <h4 class="lead-7 text-right" data-provide="countup" data-from="0" data-to="{{ num_courses }}"></h4>
+                </div>
+
+                <div class="col-6">
+                  <p class="small text-uppercase ls-2 mb-2">Kursy</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-6">
+                  <h4 class="lead-7 text-right" data-provide="countup" data-from="0" data-to="0"></h4>
+                </div>
+
+                <div class="col-6">
+                  <p class="small text-uppercase ls-2 mb-2">Godzin nagrań</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-6">
+                  <h4 class="lead-7 text-right" data-provide="countup" data-from="0" data-to="0" data-prefix="%"></h4>
+                </div>
+
+                <div class="col-6">
+                  <p class="small text-uppercase ls-2 mb-2">Satysfakcji</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+<!--licznik-->
+
+	  <!--download-->
+	  <section class="section overflow-hidden">
+        <div class="container text-center">
+          <header class="section-header">
+            <h2 class="display-4">Ucz się gdziekolwiek jesteś!</h2>
+            <br>
+            <p class="lead">Każdą lekcję możesz pobrać na swój telefon i uczyć się w dowolnym miejscu</p>
+          </header>
+
+
+          <div class="text-center gap-xy-2 my-6">
+            <a href="#"><img src="http://thetheme.io/thesaas/assets/img/app/badge-apple.png" alt="download on app store"></a>
+            <a href="#"><img src="http://thetheme.io/thesaas/assets/img/app/badge-google.png" alt="download on google play"></a>
+          </div>
+        </div>
+      </section>
+	  <!--download-->
+	  
+	    <!--register-->
+          {% include 'pages/registration.html' %}
+	    <!--register-->
+	  
+	  <!--FAQ-->
+	  <section class="section">
+        <div class="container">
+          <header class="section-header">
+            <small>FAQ</small>
+            <h2>Często zadawane pytania</h2>
+            <hr>
+            <p>Masz do nas pytanie? My mamy odpowiedź. Jeśli masz inne pytanie, skontaktuj się z naszym działem wsparcia.</p>
+          </header>
+
+
+               <div class="col-md-7 col-xl-8 mr-md-auto mx-auto py-8">
+            <article>
+              <h3 id="general" class="text-center">FAQ - często zadawane pytania</h3>
+              <br>
+
+                {% for q in faqs %}
+              <h6>{{ q.question }}</h6>
+                    <p>{{ q.answer }}</p>
+              <hr class="hr-dash">
+                {% endfor %}
+
+            </article>
+   </div>
+
+        </div>
+      </section>
+<!--FAQ-->
+	
+{% endblock %}

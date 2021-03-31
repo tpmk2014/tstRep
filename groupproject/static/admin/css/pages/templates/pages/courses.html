@@ -1,0 +1,386 @@
+{% extends "pages/base_index.html" %}
+{% load static %}
+
+
+{% block meta_tags %}
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<title>Travicon</title>
+	
+	<meta name="description" content="Strona na której uczysz się od najlepszych" />
+	<meta name="keywords" content="e-learning, znani, popularni, najlepsi" />
+	<!-- Styles -->
+    <link href="http://thetheme.io/thesaas/assets/css/page.min.css" rel="stylesheet">
+    <link href="http://thetheme.io/thesaas/assets/css/style.css">
+{% endblock %}
+{% block content %}
+	<!-- Header -->
+      <header class="header text-white" style="background-image: url({% static 'pages/background_1.jpg' %})" data-overlay="8">
+        <div class="container text-center">
+
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+
+              <h1>Naucz się <span class="text-primary" data-typing="Aktorstwa, Gry w szachy, Pokera, Wystąpień publicznych"></span></h1>
+              <p class="lead-2 mt-5">Dołącz do nas i zarejestruj się. Jedynie to dzieli Cię od pierwszych, darmowych lekcji stworzonych przez profesjonalistów znanych w całej Polsce!</p>
+
+              <hr class="w-60px my-7">
+
+              <a class="btn btn-lg btn-round btn-primary" href="#">Zobacz kursy</a>
+
+            </div>
+          </div>
+
+        </div>
+      </header><!-- /.header -->
+	  
+	  <!--partners-->
+	  <section class="section py-6">
+        <div class="container">
+
+          <div class="partner partner-sm">
+            <img src="{% static 'pages/partners/onet.png' %}" alt="partner 1">
+            <img src="{% static 'pages/partners/apple.png' %}" alt="partner 2">
+            <img src="{% static 'pages/partners/superexpress.png' %}" alt="partner 3">
+            <img src="{% static 'pages/partners/tvn.png' %}" alt="partner 4">
+            <img src="{% static 'pages/partners/eska.png' %}" alt="partner 5">
+            <img src="{% static 'pages/partners/microsoft.jpg' %}" alt="partner 6">
+          </div>
+
+        </div>
+      </section>
+ <!--partners-->
+	  <!--given_category-->
+	  <section class="header text-white" style="background-color: #2F2727">
+        <div class="container">
+          <header class="section-header">
+  
+            <h2>Wybierz kategorię</h2>
+            <hr>
+            <p class="lead">Możesz wybrać dowolną kategorię poprzez jedno kliknięcie</p>
+          </header>
+
+
+          <div data-provide="shuffle">
+            <ul class="nav nav-center nav-bold nav-uppercase nav-slash mb-7" data-shuffle="filter">
+              <li class="nav-item">
+                <a class="nav-link active" href="#" data-shuffle="button">Wszystkie</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-shuffle="button" data-group="sport">Sport</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-shuffle="button" data-group="film">Film</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-shuffle="button" data-group="cook">Gastronomia</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-shuffle="button" data-group="muzyka">Muzyka</a>
+              </li>
+            </ul>
+
+
+            <div class="row gap-y gap-2" data-shuffle="list">
+
+              <div class="col-6 col-lg-3" data-shuffle="item" data-groups="sport">
+                <a class="portfolio-1" href="#" data-toggle="modal" data-target="#modal-portfolio">
+                  <img src="lewy.jpg" alt="screenshot">
+                  <div class="portfolio-detail">
+                    <h5>Piłka nożna</h5>
+                    <p>Sport</p>
+                  </div>
+                </a>
+              </div>
+
+
+              <div class="col-6 col-lg-3" data-shuffle="item" data-groups="sport">
+                <a class="portfolio-1" href="#" data-toggle="modal" data-target="#modal-portfolio">
+                  <img src="cejrowski.jpg" alt="screenshot">
+                  <div class="portfolio-detail">
+                    <h5>Podróże</h5>
+                    <p>Sport</p>
+                  </div>
+                </a>
+              </div>
+
+
+              <div class="col-6 col-lg-3" data-shuffle="item" data-groups="cook">
+                <a class="portfolio-1" href="#" data-toggle="modal" data-target="#modal-portfolio">
+                  <img src="gessler.jpg" alt="screenshot">
+                  <div class="portfolio-detail">
+                    <h5>Gotowanie</h5>
+                    <p>Gastronomia</p>
+                  </div>
+                </a>
+              </div>
+
+
+              <div class="col-6 col-lg-3" data-shuffle="item" data-groups="muzyka">
+                <a class="portfolio-1" href="#" data-toggle="modal" data-target="#modal-portfolio">
+                  <img src="slawomir.jpg" alt="screenshot">
+                  <div class="portfolio-detail">
+                    <h5>Śpiew</h5>
+                    <p>Muzyka</p>
+                  </div>
+                </a>
+              </div>
+
+
+              <div class="col-6 col-lg-3" data-shuffle="item" data-groups="film">
+                <a class="portfolio-1" href="#" data-toggle="modal" data-target="#modal-portfolio">
+                  <img src="pazura.jpg" alt="screenshot">
+                  <div class="portfolio-detail">
+                    <h5>Scenopisarstwo</h5>
+                    <p>Film</p>
+                  </div>
+                </a>
+              </div>
+
+
+              <div class="col-6 col-lg-3" data-shuffle="item" data-groups="film">
+                <a class="portfolio-1" href="#" data-toggle="modal" data-target="#modal-portfolio">
+                  <img src="zak.jpg" alt="screenshot">
+                  <div class="portfolio-detail">
+                    <h5>Aktorstwo</h5>
+                    <p>Film</p>
+                  </div>
+                </a>
+              </div>
+
+
+              <div class="col-6 col-lg-3" data-shuffle="item" data-groups="muzyka">
+                <a class="portfolio-1" href="#" data-toggle="modal" data-target="#modal-portfolio">
+                  <img src="blechacz.jpg" alt="screenshot">
+                  <div class="portfolio-detail">
+                    <h5>Interpretacja Chopina</h5>
+                    <p>Muzyka</p>
+                  </div>
+                </a>
+              </div>
+
+
+              <div class="col-6 col-lg-3" data-shuffle="item" data-groups="sport">
+                <a class="portfolio-1" href="#" data-toggle="modal" data-target="#modal-portfolio">
+                  <img src="malysz.jpg" alt="screenshot">
+                  <div class="portfolio-detail">
+                    <h5>Skoki Narciarskie</h5>
+                    <p>Sport</p>
+                  </div>
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+
+        </div>
+      </section>
+	  <!--given_category-->
+ <!-- Modal - Portfolio -->
+    <div class="modal fade" id="modal-portfolio" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+          <div class="modal-body p-0">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+            <div class="row no-gutters">
+              <div class="col-6 col-md-5 mx-auto py-7">
+                <h5>Magda Gessler</h5>
+
+                <p>Polska restauratorka, właścicielka lub współwłaścicielka kilkunastu restauracji, malarka, pisarka, felietonistka i osobowość telewizyjna.</p>
+              </div>
+
+
+              <div class="col-5 col-md-6 position-relative" style="min-height: 300px;">
+                <video width="480" height="270" controls poster="gessler1.png">
+				<source src="gessler1.mp4" type="video/mp4">
+				</video>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+	<!-- Modal - Portfolio -->
+	  <!--download-->
+	  <section class="section overflow-hidden">
+        <div class="container text-center">
+          <header class="section-header">
+            <h2 class="display-4">Ucz się gdziekolwiek jesteś!</h2>
+            <br>
+            <p class="lead">Każdą lekcję możesz pobrać na swój telefon i uczyć się w dowolnym miejscu</p>
+          </header>
+
+
+          <div class="text-center gap-xy-2 my-6">
+            <a href="#"><img src="http://thetheme.io/thesaas/assets/img/app/badge-apple.png" alt="download on app store"></a>
+            <a href="#"><img src="http://thetheme.io/thesaas/assets/img/app/badge-google.png" alt="download on google play"></a>
+          </div>
+        </div>
+      </section>
+	  <!--download-->
+	  
+  <!--register-->
+	  <section class="section py-10" style="background-image: url({% static 'pages/register.jpg' %})" data-overlay="7">
+
+        <div class="container">
+          <h2 class="text-white text-center">Darmowa rejestracja</h2>
+          <p class="text-white text-center opacity-70 lead">Zacznij naukę już dziś!</p>
+          <br>
+
+          <div class="row">
+            <form class="col-11 col-md-6 col-xl-5 mx-auto section-dialog bg-gray p-5 p-md-7">
+              <div class="form-group input-group input-group-lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fa fa-user fa-fw"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="Imię">
+              </div>
+
+              <div class="form-group input-group input-group-lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fa fa-envelope-o fa-fw"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="E-mail">
+              </div>
+
+              <div class="form-group input-group input-group-lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fa fa-key fa-fw"></i></span>
+                </div>
+                <input type="password" class="form-control" placeholder="Hasło">
+              </div>
+
+              <button class="btn btn-block btn-lg btn-success">Potwierdź rejestrację</button>
+            </form>
+          </div>
+
+        </div>
+      </section>
+	    <!--register-->
+	  
+	  <!--FAQ-->
+	  <section class="section">
+        <div class="container">
+          <header class="section-header">
+            <small>FAQ</small>
+            <h2>Często zadawane pytania</h2>
+            <hr>
+            <p>Masz do nas pytanie? My mamy odpowiedź. Jeśli masz inne pytanie, skontaktuj się z naszym działem wsparcia.</p>
+          </header>
+
+
+          <div class="row">
+            <div class="col-md-8 mx-auto">
+
+              <div class="accordion accordion-connected accordion-arrow-right" id="accordion-1">
+                <div class="card">
+                  <h5 class="card-title">
+                    <a data-toggle="collapse" href="#collapse-1-1">Czym jest travicon.pl?</a>
+                  </h5>
+
+                  <div id="collapse-1-1" class="collapse" data-parent="#accordion-1">
+                    <div class="card-body">
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="card">
+                  <h5 class="card-title">
+                    <a class="collapsed" data-toggle="collapse" href="#collapse-1-2">Gdzie mogę oglądać lekcje?</a>
+                  </h5>
+
+                  <div id="collapse-1-2" class="collapse" data-parent="#accordion-1">
+                    <div class="card-body">
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="card">
+                  <h5 class="card-title">
+                    <a class="collapsed" data-toggle="collapse" href="#collapse-1-3">Kim są nauczyciele na travicon.pl?</a>
+                  </h5>
+
+                  <div id="collapse-1-3" class="collapse" data-parent="#accordion-1">
+                    <div class="card-body">
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="card">
+                  <h5 class="card-title">
+                    <a class="collapsed" data-toggle="collapse" href="#collapse-1-4">Jak mogę zniszczyć tę stronę, żeby nie pozostał po niej nawet pył?</a>
+                  </h5>
+
+                  <div id="collapse-1-4" class="collapse" data-parent="#accordion-1">
+                    <div class="card-body">
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+<!--FAQ-->
+
+<!-- Footer -->
+      <footer class="footer text-white bg-dark py-7">
+        <div class="container">
+          <div class="row align-items-center">
+
+            <div class="col-md-6">
+              <div class="nav nav-bold nav-uppercase justify-content-center justify-content-md-end">
+                <a class="nav-link" href="#">O nas</a>
+                <a class="nav-link" href="#">FAQ</a>
+                <a class="nav-link" href="#">Kontakt</a>
+              </div>
+            </div>
+
+            <div class="col-md-6 text-center text-md-left mt-5 mt-md-0">
+              <div class="social social-bg-dark">
+                <a class="social-facebook" href="#"><i class="fa fa-facebook"></i></a>
+                <a class="social-twitter" href="#"><i class="fa fa-twitter"></i></a>
+                <a class="social-instagram" href="#"><i class="fa fa-instagram"></i></a>
+                <a class="social-youtube" href="#"><i class="fa fa-youtube"></i></a>
+                <a class="social-dribbble" href="#"><i class="fa fa-dribbble"></i></a>
+              </div>
+            </div>
+
+            <div class="col-12 text-center">
+              <br>
+              <small>© travicon.com 2020, Wszystkie prawa zastrzeżone</small>
+            </div>
+
+          </div>
+        </div>
+      </footer>
+	  <!-- /.footer -->
+	  
+	  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	  <script src="js/bootstrap.min.js"></script>
+	  
+	  <script src="http://thetheme.io/thesaas/assets/js/page.min.js"></script>
+    <script src="http://thetheme.io/thesaas/assets/js/script.js"></script>
+	<script src="https://use.fontawesome.com/02474106df.js"></script>
+	  
+	
+{% endblock %}
