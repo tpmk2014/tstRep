@@ -2,7 +2,7 @@ from django.db import models
 import datetime
 
 
-class Articles(models.Model):
+class Article(models.Model):
   title = models.CharField(max_length=100, default="")
   author = models.CharField(max_length=250, default="")
   section = models.CharField(max_length=50, default="")
