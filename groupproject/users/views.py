@@ -46,3 +46,9 @@ def bmi_calculator_view(request):
   context = {}
   template = "users/bmi_calculator.html"
   return render(request, template, context)
+
+
+def articles_view(request):
+  context = {}
+  template = "users/articles.html"
+  return render(request, template, context)
