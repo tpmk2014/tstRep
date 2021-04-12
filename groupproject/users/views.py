@@ -40,3 +40,9 @@ def dashboard_view(request):
   dashboard_template = "users/dashboard.html"
   context = {}
   return render(request, dashboard_template, context)
+
+
+def bmi_calculator_view(request):
+  context = {}
+  template = "users/bmi_calculator.html"
+  return render(request, template, context)
