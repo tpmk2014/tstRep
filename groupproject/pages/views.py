@@ -1,9 +1,13 @@
+from django.contrib.auth import get_user_model
 from django.shortcuts import render
-
+from users.models import Trainer
 
 
 def index(request):
-  context = {}
+  User = get_user_model()
+  users = User.objects.all()
+  trainers = Trainer.objects.all()
+  context = {'users': users, 'trainers': trainers}
   return render(request, 'pages/index.html', context)
 
 
