@@ -14,4 +14,5 @@ urlpatterns = [
   path('bmi_calculator', views.bmi_calculator_view, name='bmi_calculator'),
   path('articles', views.articles_view, name='articles'),
   path('my_calories', views.my_calories_view, name='my_calories'),
+  path('change_password', views.change_user_password_view, name='change_password'),
 ]

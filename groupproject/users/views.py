@@ -58,3 +58,9 @@ def my_calories_view(request):
   context = {}
   template = "users/user_calories.html"
   return render(request, template, context)
+
+
+def change_user_password_view(request):
+  context = {}
+  template = "users/change_password.html"
+  return render(request, template, context)
