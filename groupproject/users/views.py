@@ -40,3 +40,27 @@ def dashboard_view(request):
   dashboard_template = "users/dashboard.html"
   context = {}
   return render(request, dashboard_template, context)
+
+
+def bmi_calculator_view(request):
+  context = {}
+  template = "users/bmi_calculator.html"
+  return render(request, template, context)
+
+
+def articles_view(request):
+  context = {}
+  template = "users/articles.html"
+  return render(request, template, context)
+
+
+def my_calories_view(request):
+  context = {}
+  template = "users/user_calories.html"
+  return render(request, template, context)
+
+
+def change_user_password_view(request):
+  context = {}
+  template = "users/change_password.html"
+  return render(request, template, context)

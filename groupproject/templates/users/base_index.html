@@ -26,6 +26,25 @@
         <a class="btn btn-primary my-2 my-sm-0" type="submit" href="{% url 'users:logout' %}" style="background: #03DAC6; color: white;">Wyloguj</a>
   </form>
 </nav>
+  <div class="container-fluid " style="margin: 6% 0 0 0;">
+   <ul class="nav justify-content-center" style="font-size: 18px;">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{% url 'users:dashboard' %}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'users:bmi_calculator' %}">Kalkulator BMI</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="{% url 'users:articles' %}">Treningi</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="{% url 'users:my_calories' %}">Moje Kalorie</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'users:change_password' %}">Zmiana hasła</a>
+      </li>
+    </ul>
+  </div>
     {% block content %}
 
 	{% endblock %}
