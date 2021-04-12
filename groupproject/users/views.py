@@ -52,3 +52,9 @@ def articles_view(request):
   context = {}
   template = "users/articles.html"
   return render(request, template, context)
+
+
+def my_calories_view(request):
+  context = {}
+  template = "users/user_calories.html"
+  return render(request, template, context)
