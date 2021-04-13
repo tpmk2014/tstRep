@@ -13,4 +13,5 @@ urlpatterns = [
     path('about_us', views.staticpage, name='about_us'),
     path('contact', views.contact_view, name='contact'),
     path('pricing', views.staticpage, name='pricing'),
+    path('success', views.success_view, name='success'),
 ]
