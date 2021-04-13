@@ -41,8 +41,11 @@ INSTALLED_APPS = [
     'users',
     'products',
     'pages',
-    'articles'
+    'articles',
 ]
+
+DEFAULT_FROM_EMAIL = 'informatykasan2018@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
