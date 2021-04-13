@@ -26,8 +26,14 @@ def staticpage(request):
 
   return render(request, staticpage_template, context)
 
-def contact_view(request):
 
+def success_view(request):
+  context = {}
+  template = "pages/success.html"
+  return render(request, template, context)
+
+
+def contact_view(request):
     if request.method == 'GET':
       form = ContactForm()
     else:
@@ -40,12 +46,8 @@ def contact_view(request):
           send_mail(subject, message, from_email, ['informatykasan2018@gmail.com'])
         except BadHeaderError:
           return HttpResponse('Invalid header found.')
-        return redirect('success')
+        return redirect('/success')
     context = {'form': form}
     return render(request, "pages/contact.html", context)
 
 
-def success_view(request):
-  context = {}
-  template = "pages/success.html"
-  return render(request, template, context)
