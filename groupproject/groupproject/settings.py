@@ -41,8 +41,14 @@ INSTALLED_APPS = [
     'users',
     'products',
     'pages',
-    'articles'
+    'articles',
+    'crispy_forms',
 ]
+
+DEFAULT_FROM_EMAIL = 'informatykasan2018@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

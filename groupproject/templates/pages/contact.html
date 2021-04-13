@@ -1,6 +1,24 @@
 {% extends "pages/base_index.html" %}
 {% load static %}
-
+{% load crispy_forms_tags %}
+<style>
+#id_from_email{
+    outline: none;
+    margin:0 0 0 0;
+    width: 100px;
+}
+</style>
 {% block content %}
-
+<div style="margin:8% 0 2% 0;">
+    <h1 style="text-align: center;">Contact Us</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div style="width: 70%; margin:auto;">
+            {{ form|crispy }}
+        </div>
+        <div class="form-actions" style="width: 70%; margin:auto;">
+          <button type="submit" class="btn btn-primary float-right" style="margin:1% 0 0 0;">Wyślij</button>
+        </div>
+    </form>
+</div>
 {% endblock %}
