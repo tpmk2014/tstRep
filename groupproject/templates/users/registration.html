@@ -1,13 +1,26 @@
 {% extends "pages/base_index.html" %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 {% block content %}
-
-<h1>Rejestracja</h1>
+<div style="margin:8% 0 2% 0;">
+<h1 style="text-align: center;">Rejestracja</h1>
 <form class="registration_form" action="{% url 'users:registration' %}" method="post">
     {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Rejestracja">
+    <div style="width: 70%; margin:auto;">
+    {{ form|crispy }}
+	</div>
+	<div class="form-actions" style="width: 70%; margin:auto;">
+    <input type="submit" value="Rejestracja" style="margin:1% 0 0 0; color: #232323;
+    	background: linear-gradient(to top left, powderblue, pink);
+    	border: 1px solid #232323;
+    	position: relative;
+    	font-size: 14px;
+    	letter-spacing: .3em;
+    	font-family: 'Montserrat', sans-serif;
+    	padding: 17px 34px 17px 39px;
+    	transition: .2s ease-in-out;
+    	cursor: pointer;">
+    </div>
 </form>
-
+</div>
 {% endblock %}
