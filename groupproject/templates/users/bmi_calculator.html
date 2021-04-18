@@ -10,12 +10,19 @@
 <style>
     body {
         margin: 0;
-        height: 1000px;
+        height: auto;
         padding: 0;
         border: 0;
         background: linear-gradient(#f8f9fa, #ccffff);;
     }
 
+    #sectionOne {
+        margin: 0 0 50px 0;
+    }
+
+    #visibleDiv {
+        margin: 0 0 50px 0;
+    }
 
     .form {
         background-color: #fcffff;
@@ -68,7 +75,8 @@
         border-radius: 10px;
         height: 40px;
         width: 140px;
-        background-color: #289df6;
+        background-color: #002699;
+        color: #0b0b0b;
         color: #fff;
         margin: auto;
         display: block;
@@ -77,7 +85,7 @@
     }
 
     #submit:hover {
-        background-color: #cbe7fd;
+        background-color: #809fff;
     }
 
     #reload {
@@ -97,6 +105,22 @@
         background-color: #cbe7fd;
     }
 
+
+    #reload1 {
+        border: none;
+        border-radius: 10px;
+        height: 40px;
+        width: 140px;
+        background-color: #289df6;
+        color: #fff;
+        outline: none;
+        cursor: pointer;
+        text-align: center
+    }
+
+    #reload1:hover {
+        background-color: #cbe7fd;
+    }
 
     .text {
         display: inline-block;
@@ -199,115 +223,160 @@
 
 {% block content %}
 
-<section class="sectionOne">
-    <h3>Kalkulator <b>B</b>ody <b>M</b>ass <b>I</b>ndex</h3>
-    <form class="form" id="form" onsubmit="return validateForm()">
-        <div class="row-one">
-            <input type="text" class="text-input" id="age" autocomplete="off" required/>
-            <p class="text">Wiek</p>
-            <label class="container1">
-                <input type="radio" name="radio" id="f">
-                <p class="text">Kobieta</p>
-                <span class="checkmark"></span>
-            </label>
-            <label class="container1">
-                <input type="radio" name="radio" id="m">
-                <p class="text">Mężczyzna</p>
-                <span class="checkmark"></span>
-            </label>
+<div id="visibleDiv">
+    <section id="sectionOne">
+
+        <h3>Kalkulator <b>B</b>ody <b>M</b>ass <b>I</b>ndex</h3>
+
+        <div id="hiddenDiv">
+            <form class="form" id="form" onsubmit="return validateForm()">
+                <div class="row-one">
+                    <input type="text" class="text-input" id="age" autocomplete="off" required/>
+                    <p class="text">Wiek</p>
+                    <label class="container1">
+                        <input type="radio" name="radio" id="f">
+                        <p class="text">Kobieta</p>
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container1">
+                        <input type="radio" name="radio" id="m">
+                        <p class="text">Mężczyzna</p>
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+
+                <div class="row-two">
+                    <input type="text" class="text-input" id="height" autocomplete="off" required>
+                    <p class="text">Wysokość (cm)</p>
+                    <input type="text" class="text-input" id="weight" autocomplete="off" required>
+                    <p class="text">Waga (kg)</p>
+                </div>
+                <button type="button" id="submit">Oblicz</button>
+
+                <button id="reload" onclick="myFun()">Reset</button>
+
+
+            </form>
+
         </div>
 
-        <div class="row-two">
-            <input type="text" class="text-input" id="height" autocomplete="off" required>
-            <p class="text">Wysokość (cm)</p>
-            <input type="text" class="text-input" id="weight" autocomplete="off" required>
-            <p class="text">Waga (kg)</p>
-        </div>
-        <button type="button" id="submit">Oblicz</button>
-        <button id="reload" onClick="window.location.reload();">Reset</button>
+    </section>
 
-    </form>
-
-    <script>
-        var age = document.getElementById("age");
-        var height = document.getElementById("height");
-        var weight = document.getElementById("weight");
-        var male = document.getElementById("m");
-        var female = document.getElementById("f");
-        var form = document.getElementById("form");
-
-        function validateForm() {
-
-            if (age.value == '' || height.value == '' || weight.value == '' || (male.checked == false && female.checked == false)) {
-                alert("Wszystkie pola są wymagane!");
-                document.getElementById("submit").removeEventListener("click", countBmi);
-            } else if (isNaN(age.value) || isNaN(height.value) || isNaN(weight.value)) {
-                alert("Wprowadzona wartość nie jest liczbą. Proszę wprowadzić dane poprawnie");
-            } else if (age.value >= 123) {
-                alert("Niestety nawet nie istnieje osoby w takim wieku :(");
-            } else if (age.value <= 5) {
-                alert("Niestety wciąż jesteś na to za młody :(  Ale kiedy dorośniesz, wracaj na naszą stronę!)");
-            } else {
-                countBmi();
-            }
-        }
-
-        document.getElementById("submit").addEventListener("click", validateForm);
-
-        function countBmi() {
-            var p = [age.value, height.value, weight.value];
-            if (male.checked) {
-                p.push("male");
-            } else if (female.checked) {
-                p.push("female");
-            }
-            form.reset();
-            var bmi = Number(p[2]) / (Number(p[1]) / 100 * Number(p[1]) / 100);
+</div>
 
 
-            var result = '';
-            var tekst = '';
-            if (bmi < 18.5) {
-                result = 'Oznacza to, niedowagę';
-            } else if (18.5 <= bmi && bmi <= 24.9) {
-                result = 'Oznacza to, że waga jest prawidłowa. Gratulacje!';
-            } else if (25 <= bmi && bmi <= 29.9) {
-                result = 'Oznacza to, nadwagę';
-            } else if (30 <= bmi && bmi <= 34.9) {
-                result = 'Oznacza to, otyły';
-            } else if (35 <= bmi) {
-                result = 'Oznacza to, Wyjątkowo otyły';
-            }
-
-            var h1 = document.createElement("h1");
-            var h2 = document.createElement("h2");
+<button id="reload1" onclick="myFun()">Reset</button>
+<script>
+    var resetbtn1 = document.getElementById("reload1");
+    resetbtn1.style.visibility = 'hidden';
+</script>
 
 
-            var t = document.createTextNode(result);
-            var b = document.createTextNode('Wskaźnik BMI wynosi: ');
-            var r = document.createTextNode(parseFloat(bmi).toFixed(2));
+<script>
 
+    var age = document.getElementById("age");
+    var height = document.getElementById("height");
+    var weight = document.getElementById("weight");
+    var male = document.getElementById("m");
+    var female = document.getElementById("f");
+    var form = document.getElementById("form");
+    var hiddenDiv = document.getElementById("hiddenDiv");
+    var resetbtn = document.getElementById("reload");
+    var resetbtn1 = document.getElementById("reload1");
 
-            h1.appendChild(b);
-            h1.appendChild(r);
-            h2.appendChild(t);
+    function validateForm() {
 
-
-            document.body.appendChild(h1);
-            document.body.appendChild(h2);
-
-
+        if (age.value == '' || height.value == '' || weight.value == '' || (male.checked == false && female.checked == false)) {
+            alert("Wszystkie pola są wymagane!");
             document.getElementById("submit").removeEventListener("click", countBmi);
-            document.getElementById("submit").removeEventListener("click", validateForm);
+        } else if (isNaN(age.value) || isNaN(height.value) || isNaN(weight.value)) {
+            alert("Wprowadzona wartość nie jest liczbą. Proszę wprowadzić dane poprawnie");
+        } else if (age.value >= 123) {
+            alert("Niestety nawet nie istnieje osoby w takim wieku :(");
+        } else if (age.value <= 5) {
+            alert("Niestety wciąż jesteś na to za młody :(  Ale kiedy dorośniesz, wracaj na naszą stronę!)");
+        } else if ((height.value >= 251 || height.value <= 54) && ( weight.value >= 500 || weight.value <= 10)) {
+            alert("Podano nieprawidłową wartości wzrostu i wagi");
+        } else if (height.value >= 251 || height.value <= 54) {
+            alert("Podano nieprawidłową wartość wzrostu");
+        } else if (weight.value >= 500 || weight.value <= 10) {
+            alert("Podano nieprawidłowa wartość wagi");
+        } else {
+            countBmi();
 
-            document.getElementById("submit").addEventListener("click", countBmi);
-
+            hiddenDiv.style.display = 'none';
+            resetbtn1.style.visibility = 'visible';
 
         }
+    }
+
+    document.getElementById("submit").addEventListener("click", validateForm);
+
+    function countBmi() {
+        var p = [age.value, height.value, weight.value];
+        if (male.checked) {
+            p.push("male");
+        } else if (female.checked) {
+            p.push("female");
+        }
+        form.reset();
+        var bmi = Number(p[2]) / (Number(p[1]) / 100 * Number(p[1]) / 100);
 
 
-    </script>
-</section>
+        var result = '';
 
+        if (bmi < 18.5) {
+            result = 'Oznacza to, niedowagę';
+        } else if (18.5 <= bmi && bmi <= 24.9) {
+            result = 'Oznacza to, że waga jest prawidłowa. Gratulacje!';
+        } else if (25 <= bmi && bmi <= 29.9) {
+            result = 'Oznacza to, nadwagę';
+        } else if (30 <= bmi && bmi <= 34.9) {
+            result = 'Oznacza to, otyły';
+        } else if (35 <= bmi) {
+            result = 'Oznacza to, Wyjątkowo otyły';
+        }
+
+        var h1 = document.createElement("h1");
+        var h2 = document.createElement("h2");
+        var h3 = document.createElement("h3");
+
+        var t = document.createTextNode(result);
+        var b = document.createTextNode('Wskaźnik BMI wynosi: ');
+        var r = document.createTextNode(parseFloat(bmi).toFixed(2));
+
+
+        h1.appendChild(b);
+        h1.appendChild(r);
+        h2.appendChild(t);
+        h3.appendChild(resetbtn1);
+
+        //document.body.appendChild(h1);
+        //document.body.appendChild(h2);
+
+        document.getElementById("sectionOne").appendChild(h1);
+        document.getElementById("sectionOne").appendChild(h2);
+        document.getElementById("sectionOne").appendChild(h3);
+
+        document.getElementById("submit").removeEventListener("click", countBmi);
+        document.getElementById("submit").removeEventListener("click", validateForm);
+
+        document.getElementById("submit").addEventListener("click", countBmi);
+
+
+    }
+
+    //  document.getElementById("submit").style.display = 'none';
+
+</script>
+
+<script>
+
+    function myFun() {
+        window.location.reload();
+    }
+
+    document.getElementById("reload").addEventListener("click", myFun);
+</script>
 
 {% endblock %}
