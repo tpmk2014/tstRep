@@ -1,7 +1,7 @@
 # Dobra Kaloria
 Start
 -created UML Diagrams
-v 1.0
+v 1.0<br>
 - created main page
 - created login and registration pages
 - maked authentification system
