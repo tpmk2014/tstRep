@@ -3,6 +3,7 @@ Start <br>
 - created UML Diagrams<br>
 v 1.0
 - created main page
+- created base models for data base
 - created login and registration pages
 - maked authentification system
 - added user account<br>
