@@ -7,7 +7,6 @@ from pages.forms import ContactForm
 from users.models import Trainer
 from articles.models import Section
 from articles.models import Article
-#from groupproject.articles.models import Section
 
 
 def index(request):
@@ -19,7 +18,6 @@ def index(request):
   context = {'users': users, 'trainers': trainers, 'sections': sections, 'articles': articles}
 
   return render(request, 'pages/index.html', context)
-
 
 
 def staticpage(request):
