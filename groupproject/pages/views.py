@@ -5,14 +5,21 @@ from django.shortcuts import render, redirect
 
 from pages.forms import ContactForm
 from users.models import Trainer
+from articles.models import Section
+from articles.models import Article
+#from groupproject.articles.models import Section
 
 
 def index(request):
   User = get_user_model()
   users = User.objects.all()
   trainers = Trainer.objects.all()
-  context = {'users': users, 'trainers': trainers}
+  articles = Article.objects.all()
+  sections = Section.objects.all()
+  context = {'users': users, 'trainers': trainers, 'sections': sections, 'articles': articles}
+
   return render(request, 'pages/index.html', context)
+
 
 
 def staticpage(request):
