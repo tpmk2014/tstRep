@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
+from products.forms import ProductForm
+
 
 def login_view(request):
   if request.method == 'POST':
@@ -55,7 +57,8 @@ def articles_view(request):
 
 
 def my_calories_view(request):
-  context = {}
+  form = ProductForm(request.POST)
+  context = {'form': form}
   template = "users/user_calories.html"
   return render(request, template, context)
 

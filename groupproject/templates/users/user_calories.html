@@ -1,6 +1,6 @@
 {% extends "users/base_index.html" %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 
 {% block meta_tags %}
 	<title>Moje kalorie</title>
@@ -11,9 +11,18 @@
 	<div class="d-flex justify-content-center">
 		<div class="p-2 bd-highlight">
 			<div class="card-body">
-				<h5 class="card-title">Special title treatment</h5>
-				<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-				<a href="#" class="btn btn-primary">Dodać produkt</a>
+				<form class="registration_form" action="{% url 'users:login' %}" method="post">
+					{% csrf_token %}
+					 <div class="form-row">
+					  <div class="form-group col-md-6 mb-0">
+						{{ form.name|as_crispy_field }}
+					  </div>
+					  <div class="form-group col-md-6 mb-0">
+						{{ form.caloric_content|as_crispy_field }}
+					  </div>
+						 <button type="button" class="btn btn-success float-right">Dodaj</button>
+					</div>
+				</form>
 			  </div>
 		</div>
 	</div>
