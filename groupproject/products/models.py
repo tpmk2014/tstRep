@@ -3,8 +3,8 @@ from django.db import models
 
 
 class Product(models.Model):
-  name = models.CharField('Nazwa produktu', max_length=100)
-  caloric_content = models.CharField('Wartość kaloryczna na 100 g prodkuktu', max_length=10)
+  name = models.CharField(max_length=100)
+  caloric_content = models.CharField(max_length=10)
 
   def __str__(self):
     return self.name
@@ -19,3 +19,8 @@ class Calories(models.Model):
 
   def __str__(self):
     return str(self.user)
+
+  def save(self, *args, **kwargs):
+    caloric_value = Product.objects.get(name=self.product).caloric_content
+    self.calories_sum = str(int(caloric_value) * int(self.weight))
+    super(Calories, self).save(*args, **kwargs)

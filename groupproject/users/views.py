@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 
-from products.forms import ProductForm
+from products.forms import ProductForm, CaloriesForm
 from products.models import Calories
 
 from users.models import Trainer
@@ -63,9 +63,9 @@ def articles_view(request):
 
 def my_calories_view(request):
   user_calories = Calories.objects.filter(user=request.user)
-  print (user_calories)
-  form = ProductForm(request.POST)
-  context = {'form': form, 'user_calories': user_calories}
+  product_form = ProductForm(request.POST)
+  calories_form = CaloriesForm(request.POST)
+  context = {'product_form': product_form, 'user_calories': user_calories, 'calories_form': calories_form}
   template = "users/user_calories.html"
   return render(request, template, context)
 
