@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 
 from products.forms import ProductForm
-
+from products.models import Calories
 
 from users.models import Trainer
 
@@ -57,14 +57,15 @@ def bmi_calculator_view(request):
 def articles_view(request):
   trainers = Trainer.objects.all()
   context = {'trainers': trainers}
-  print(trainers)
   template = "users/articles.html"
   return render(request, template, context)
 
 
 def my_calories_view(request):
+  user_calories = Calories.objects.filter(user=request.user)
+  print (user_calories)
   form = ProductForm(request.POST)
-  context = {'form': form}
+  context = {'form': form, 'user_calories': user_calories}
   template = "users/user_calories.html"
   return render(request, template, context)
 
