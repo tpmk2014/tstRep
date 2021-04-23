@@ -7,6 +7,7 @@ class Trainer(models.Model):
   occupation = models.CharField(max_length=150, default="")
   email = models.EmailField(default="")
   phone_number = models.CharField(max_length=12, default="")
+  info = models.TextField(default="")
 
   def __str__(self):
     return str(self.first_name) + " " + str(self.last_name)
