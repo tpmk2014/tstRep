@@ -3,7 +3,11 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
+
 from products.forms import ProductForm
+
+
+from users.models import Trainer
 
 
 def login_view(request):
@@ -51,7 +55,9 @@ def bmi_calculator_view(request):
 
 
 def articles_view(request):
-  context = {}
+  trainers = Trainer.objects.all()
+  context = {'trainers': trainers}
+  print(trainers)
   template = "users/articles.html"
   return render(request, template, context)
 
