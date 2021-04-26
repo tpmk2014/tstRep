@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 
 from products.forms import ProductForm, CaloriesForm
-from products.models import Calories
+from products.models import Calories, Product
 
 from users.models import Trainer
 
@@ -63,8 +63,26 @@ def articles_view(request):
 
 def my_calories_view(request):
   user_calories = Calories.objects.filter(user=request.user)
-  product_form = ProductForm(request.POST)
-  calories_form = CaloriesForm(request.POST)
+  product_form = ProductForm()
+  calories_form = CaloriesForm()
+  if request.method == 'POST':
+    product_form = ProductForm(request.POST)
+    if product_form.is_valid():
+      name = product_form.cleaned_data['name']
+      caloric_content = product_form.cleaned_data['caloric_content']
+      Product.objects.create(name=name, caloric_content=caloric_content)
+    else:
+      product_form = ProductForm()
+
+  if request.method == 'POST':
+    calories_form = CaloriesForm(request.POST)
+    if calories_form.is_valid():
+      product = calories_form.cleaned_data['product']
+      weight = calories_form.cleaned_data['weight']
+      db_product = Product.objects.get(name=product)
+      Calories.objects.create(user=request.user, product=db_product, weight=weight)
+    else:
+      calories_form = CaloriesForm()
   context = {'product_form': product_form, 'user_calories': user_calories, 'calories_form': calories_form}
   template = "users/user_calories.html"
   return render(request, template, context)
