@@ -65,22 +65,23 @@ def my_calories_view(request):
   user_calories = Calories.objects.filter(user=request.user)
   product_form = ProductForm()
   calories_form = CaloriesForm()
+  # Adding products to base
   if request.method == 'POST':
     product_form = ProductForm(request.POST)
     if product_form.is_valid():
       name = product_form.cleaned_data['name']
       caloric_content = product_form.cleaned_data['caloric_content']
-      Product.objects.create(name=name, caloric_content=caloric_content)
+      Product.objects.create(name=name.lower(), caloric_content=caloric_content)
     else:
       product_form = ProductForm()
-
+  # Adding products to user list
   if request.method == 'POST':
     calories_form = CaloriesForm(request.POST)
     if calories_form.is_valid():
       product = calories_form.cleaned_data['product']
       weight = calories_form.cleaned_data['weight']
       db_product = Product.objects.get(name=product)
-      Calories.objects.create(user=request.user, product=db_product, weight=weight)
+      Calories.objects.create(user=request.user, product=db_product.lower(), weight=weight)
     else:
       calories_form = CaloriesForm()
   context = {'product_form': product_form, 'user_calories': user_calories, 'calories_form': calories_form}
