@@ -7,8 +7,11 @@ class Product(models.Model):
   caloric_content = models.CharField(max_length=10)
 
   def __str__(self):
-    return self.name
+    return self.name.lower()
 
+  def save(self, *args, **kwargs):
+    self.name = self.name.lower()
+    super(Product, self).save(*args, **kwargs)
 
 class Calories(models.Model):
   user = models.ForeignKey(User, blank=False, on_delete=models.CASCADE)
@@ -23,6 +26,5 @@ class Calories(models.Model):
   def save(self, *args, **kwargs):
     caloric_value = Product.objects.get(name=self.product).caloric_content
     self.calories_sum = str(int(caloric_value) * int(self.weight))
-    super(Calories, self).save(*args, **kwargs)
     self.date = timezone.now()
     super(Calories, self).save(*args, **kwargs)

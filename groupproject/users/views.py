@@ -7,7 +7,7 @@ from products.forms import ProductForm, CaloriesForm
 from products.models import Calories, Product
 
 from users.models import Trainer
-
+from django.core.exceptions import ObjectDoesNotExist
 
 def login_view(request):
   if request.method == 'POST':
@@ -61,7 +61,8 @@ def articles_view(request):
 
 
 def my_calories_view(request):
-  user_calories = Calories.objects.filter(user=request.user)
+  message = ""
+  user_calories = Calories.objects.filter(user=request.user).order_by("-date")
   product_form = ProductForm()
   calories_form = CaloriesForm()
   # Adding products to base
@@ -70,7 +71,12 @@ def my_calories_view(request):
     if product_form.is_valid():
       name = product_form.cleaned_data['name']
       caloric_content = product_form.cleaned_data['caloric_content']
-      Product.objects.create(name=name.lower(), caloric_content=caloric_content)
+      try:
+        Product.objects.get(name=name.lower(), caloric_content=caloric_content)
+        message = "Produkt już istnieje w bazie"
+      except ObjectDoesNotExist:
+        Product.objects.create(name=name.lower(), caloric_content=caloric_content)
+        message = "Produkt został dodany do bazy"
     else:
       product_form = ProductForm()
   # Adding products to user list
@@ -79,11 +85,16 @@ def my_calories_view(request):
     if calories_form.is_valid():
       product = calories_form.cleaned_data['product']
       weight = calories_form.cleaned_data['weight']
-      db_product = Product.objects.get(name=product)
-      Calories.objects.create(user=request.user, product=db_product.lower(), weight=weight)
+      product = product.lower()
+      try:
+        db_product = Product.objects.get(name=product)
+        Calories.objects.create(user=request.user, product=db_product, weight=weight)
+        message = "Produkt został dodany"
+      except ObjectDoesNotExist:
+        message = "Produkt nie istnieje w bazie"
     else:
       calories_form = CaloriesForm()
-  context = {'product_form': product_form, 'user_calories': user_calories, 'calories_form': calories_form}
+  context = {'product_form': product_form, 'user_calories': user_calories, 'calories_form': calories_form, 'message': message}
   template = "users/user_calories.html"
   return render(request, template, context)
 
