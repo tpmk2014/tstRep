@@ -1,12 +1,101 @@
 {% extends "users/base_index.html" %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 
 {% block meta_tags %}
 	<title>Moje kalorie</title>
 
 {% endblock %}
 
-{% block content %}
 
+{% block content %}
+<script>
+	function show(element_id, button_id){
+		var element = document.getElementById(element_id);
+		var button = document.getElementById(button_id);
+		if(element.style.display == "block"){
+			element.style.display = "none";
+			if(button_id == 'btn_add_product_base'){
+				button.innerHTML = "Dodaj produkt do bazy";
+			}
+			else if(button_id == 'btn_add_product_list'){
+				button.innerHTML = "Dodaj produkt do listy";
+			}
+		}
+		else{
+			element.style.display = "block";
+			button.innerHTML = "Schowaj";
+			}
+	}
+</script>
+
+	<div class="d-flex justify-content-center">
+		<div class="p-2 bd-highlight mt-4">
+			<div class="card-body" id="add_product_base_card" style="display: none;">
+				<h2 class="h2">Dodaj produkt do bazy</h2>
+				<form class="new_product_form" action="{% url 'users:my_calories' %}" method="post">
+					{% csrf_token %}
+					 <div class="form-row">
+					  <div class="form-group col-md-6 mb-0">
+						{{ product_form.name|as_crispy_field }}
+					  </div>
+					  <div class="form-group col-md-6 mb-0">
+						{{ product_form.caloric_content|as_crispy_field }}
+					  </div>
+						 <button type="submit" class="btn btn-success float-right">Dodaj</button>
+					</div>
+				</form>
+			  </div>
+			<button type="button" class="btn btn-success float-right" id="btn_add_product_base" onclick="show('add_product_base_card', 'btn_add_product_base')">Dodaj produkt do bazy</button>
+		</div>
+	</div>
+	<div class="d-flex justify-content-center">
+		<div class="p-2 bd-highlight">
+			<div class="card-body" id="add_product_list_card" style="display: none;">
+				<h2 class="h2">Dodaj produkt do listy</h2>
+				<form class="new_calories_form" action="{% url 'users:my_calories' %}" method="post">
+					{% csrf_token %}
+					 <div class="form-row">
+					  <div class="form-group col-md-6 mb-0">
+						{{ calories_form.product|as_crispy_field }}
+					  </div>
+					  <div class="form-group col-md-6 mb-0">
+						{{ calories_form.weight|as_crispy_field }}
+					  </div>
+						 <button type="submit" class="btn btn-success float-right">Dodaj</button>
+					</div>
+				</form>
+			  </div>
+			<button type="button" class="btn btn-primary float-right" id="btn_add_product_list" onclick="show('add_product_list_card', 'btn_add_product_list')">Dodaj produkt do listy kalorii</button>
+		</div>
+	</div>
+	{% if message != "" %}
+	<div class="d-flex justify-content-center mt-4">
+		<div style="margin:auto; background:#44B2F6; width: 70%; text-align: center; padding: 40px; border-radius: 5px;">
+			<h2 class="h2" style="color: white;">{{ message }}</h2>
+		</div>
+	</div>
+	{% endif %}
+	<div class="d-flex justify-content-center mb-6">
+		<div class="p-2 bd-highlight w-70" style=" {% if user_calories.count < 5 %}margin-bottom: 22%; {% endif %}">
+			{% for calorie_unit in user_calories %}
+			<div class="card-body mt-2" style="background:#A6DAD5; border-radius: 5px;">
+				<div class="row">
+					<div class="form-group col mb-0">
+						<h3 style="">{{ calorie_unit.product }}</h3>
+					</div>
+					<div class="form-group col mb-0">
+						<h3 style="">{{ calorie_unit.weight }}g</h3>
+					</div>
+					<div class="form-group col mb-0">
+						<h3 style="">{{ calorie_unit.calories_sum }}k</h3>
+					</div>
+					<div class="form-group col mb-0">
+						<h3 style="">{{ calorie_unit.date }}k</h3>
+					</div>
+				</div>
+			  </div>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}
