@@ -2,7 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div style="margin:8% 0 2% 0;">
+<div class="flex my-10">
 <h1 style="text-align: center;">Rejestracja</h1>
 <form class="registration_form" action="{% url 'users:registration' %}" method="post">
     {% csrf_token %}

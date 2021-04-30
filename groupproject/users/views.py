@@ -9,6 +9,7 @@ from products.models import Calories, Product
 from users.models import Trainer
 from django.core.exceptions import ObjectDoesNotExist
 
+
 def login_view(request):
   if request.method == 'POST':
     form = AuthenticationForm(data=request.POST)
@@ -35,6 +36,7 @@ def registration_view(request):
   return render(request, 'users/registration.html', context)
 
 
+@login_required
 def logout_view(request):
   logout(request)
   return redirect('pages:home')
@@ -47,12 +49,14 @@ def dashboard_view(request):
   return render(request, dashboard_template, context)
 
 
+@login_required
 def bmi_calculator_view(request):
   context = {}
   template = "users/bmi_calculator.html"
   return render(request, template, context)
 
 
+@login_required
 def articles_view(request):
   trainers = Trainer.objects.all()
   context = {'trainers': trainers}
@@ -60,6 +64,7 @@ def articles_view(request):
   return render(request, template, context)
 
 
+@login_required
 def my_calories_view(request):
   message = ""
   user_calories = Calories.objects.filter(user=request.user).order_by("-date")
@@ -99,6 +104,7 @@ def my_calories_view(request):
   return render(request, template, context)
 
 
+@login_required
 def change_user_password_view(request):
   context = {}
   template = "users/change_password.html"
