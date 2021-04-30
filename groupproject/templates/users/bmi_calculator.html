@@ -17,7 +17,7 @@
     }
 
     #sectionOne {
-        margin: 0 0 50px 0;
+        margin: 2% 0 50px 0;
     }
 
     #visibleDiv {
@@ -223,11 +223,9 @@
 
 {% block content %}
 
-<div id="visibleDiv">
+<div id="visibleDiv" class="mb-10">
     <section id="sectionOne">
-
         <h3>Kalkulator <b>B</b>ody <b>M</b>ass <b>I</b>ndex</h3>
-
         <div id="hiddenDiv">
             <form class="form" id="form" onsubmit="return validateForm()">
                 <div class="row-one">
@@ -244,7 +242,6 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
-
                 <div class="row-two">
                     <input type="text" class="text-input" id="height" autocomplete="off" required>
                     <p class="text">Wysokość (cm)</p>
@@ -252,14 +249,9 @@
                     <p class="text">Waga (kg)</p>
                 </div>
                 <button type="button" id="submit">Oblicz</button>
-
                 <button id="reload" onclick="myFun()">Reset</button>
-
-
             </form>
-
         </div>
-
     </section>
 
 </div>
@@ -357,11 +349,13 @@
         document.getElementById("sectionOne").appendChild(h1);
         document.getElementById("sectionOne").appendChild(h2);
         document.getElementById("sectionOne").appendChild(h3);
+        document.getElementById("sectionOne").style.margin = "0 0 8% 0";
 
         document.getElementById("submit").removeEventListener("click", countBmi);
         document.getElementById("submit").removeEventListener("click", validateForm);
 
         document.getElementById("submit").addEventListener("click", countBmi);
+
 
 
     }
