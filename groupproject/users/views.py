@@ -9,6 +9,12 @@ from products.models import Calories, Product
 from users.models import Trainer
 from django.core.exceptions import ObjectDoesNotExist
 
+from requests import get
+from ip2geotools.databases.noncommercial import DbIpCity
+import requests, json
+
+
+openweathermap_api_key = "dd86f6b5b099f8d3b79ea6d6919eecd4"
 
 def login_view(request):
   if request.method == 'POST':
@@ -44,8 +50,67 @@ def logout_view(request):
 
 @login_required
 def dashboard_view(request):
+  base_url = "http://api.openweathermap.org/data/2.5/weather?"
+  ip = get('https://api.ipify.org').text
+  response = DbIpCity.get(ip, api_key='free')
+  city_name = response.city
+
+  complete_url = base_url + "appid=" + openweathermap_api_key + "&q=" + city_name
+  response = requests.get(complete_url)
+  json_response = response.json()
+
+  if json_response["cod"] != "404":
+    json_main = json_response["main"]
+    json_weather = json_response["weather"][0]
+
+    current_temperature = int(json_main["temp"]) - 273
+    temperature_feels_like = int(json_main["feels_like"]) - 273
+    current_pressure = json_main["pressure"]
+    current_humidity = json_main["humidity"]
+    wind_speed = json_response["wind"]["speed"]
+    weather = str(json_weather["main"])
+    weather = weather.lower()
+    clouds = json_response["clouds"]["all"]
+    if "thunderstorm" in weather:
+      weather_message = "Prosimy zostać się w domu, nasuwa się burza z piorunami"
+      message_color = "#DE3163"
+    elif "drizzle" in weather:
+      weather_message = "Powstrzymaj się od spacerów i uprawiania sportu, nadchodzi mały deszcz"
+      message_color = "#F9E79F"
+    elif "rain" in weather:
+      weather_message = "Nadchodzi deszcz, radzimy pozostać w domu"
+      message_color = "#5DADE2"
+    elif "snow" in weather:
+      weather_message = "Ubierz się cieplej przed wyjściem na zewnątrz"
+      message_color = "#EBF5FB"
+    elif "clear" in weather:
+      if temperature_feels_like > 14:
+        weather_message = "Ładna pogoda dla spaceru, treningu lub odpoczynku"
+        message_color = "#82E0AA"
+      else:
+        weather_message = "Ładna pogoda dla spaceru tylko prosimu ubrać się ciepło"
+        message_color = "#82E0AA"
+    elif "clouds" in weather:
+      if "few clouds" in weather and temperature_feels_like > 14:
+        weather_message = "Bardzo dobra pogoda. Możesz pójść na spacer lub zająć się treningiem"
+        message_color = "#ABEBC6"
+      else:
+        weather_message = "Pogoda nie zbyt dobrze pasuje do treningu lub długiego spaceru"
+        message_color = "#F9E79F"
+    elif "mist" in weather:
+      weather_message = "Widoczność jest ograniczona, zachowaj ostrożność podczas chodzenia na zewnątrz"
+      message_color = "#CACFD2"
+    elif "fog" in weather:
+      weather_message = "Widoczność jest ograniczona, zachowaj ostrożność podczas chodzenia na zewnątrz"
+      message_color = "#CACFD2"
+    elif "tornado" in weather:
+      weather_message = "Zostań się w domu, na zewnątrz jest niebezpieczne"
+      message_color = "#E74C3C"
+  else:
+    print(" City Not Found ")
+
   dashboard_template = "users/dashboard.html"
-  context = {}
+  context = {"city_name": city_name, "temperature": current_temperature, "feels_like": temperature_feels_like, "pressure": current_pressure, "humidity": current_humidity, "wind_speed": wind_speed, "clouds": clouds, "message": weather_message, "message_color": message_color}
   return render(request, dashboard_template, context)
 
 
