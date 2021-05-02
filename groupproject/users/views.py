@@ -12,7 +12,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from requests import get
 from ip2geotools.databases.noncommercial import DbIpCity
 import requests, json
-from translate import Translator
+
 
 openweathermap_api_key = "dd86f6b5b099f8d3b79ea6d6919eecd4"
 
@@ -54,8 +54,7 @@ def dashboard_view(request):
   ip = get('https://api.ipify.org').text
   response = DbIpCity.get(ip, api_key='free')
   city_name = response.city
-  translator = Translator(to_lang="pl")
-
+  message = ""
 
   complete_url = base_url + "appid=" + openweathermap_api_key + "&q=" + city_name
   response = requests.get(complete_url)
@@ -70,16 +69,34 @@ def dashboard_view(request):
     current_pressure = json_main["pressure"]
     current_humidity = json_main["humidity"]
     wind_speed = json_response["wind"]["speed"]
-    weather = str(json_weather["description"])
-    weather_pl = translator.translate(weather)
-    if "weather condition" in weather_pl:
-      weather_pl = weather_pl.replace("weather condition", "")
+    weather = str(json_weather["main"])
     clouds = json_response["clouds"]["all"]
+    if "thunderstorm" in weather:
+      message = ""
+    elif "drizzle" in weather:
+      message = ""
+    elif "rain" in weather:
+      message = ""
+    elif "snow" in weather:
+      message = ""
+    elif "clear" in weather and temperature_feels_like > 14:
+      message = ""
+    elif "clouds" in weather:
+      if "few clouds" in weather:
+        message = ""
+      else:
+        message = ""
+    elif "mist" in weather:
+      message = ""
+    elif "fog" in weather:
+      message = ""
+    elif "tornado" in weather:
+      message = ""
   else:
     print(" City Not Found ")
 
   dashboard_template = "users/dashboard.html"
-  context = {"city_name": city_name, "temperature": current_temperature, "feels_like": temperature_feels_like, "pressure": current_pressure, "humidity": current_humidity, "wind_speed": wind_speed, "weather": weather_pl,"clouds": clouds}
+  context = {"city_name": city_name, "temperature": current_temperature, "feels_like": temperature_feels_like, "pressure": current_pressure, "humidity": current_humidity, "wind_speed": wind_speed, "message": message,"clouds": clouds}
   return render(request, dashboard_template, context)
 
 
