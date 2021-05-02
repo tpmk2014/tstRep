@@ -82,10 +82,14 @@ def dashboard_view(request):
       message_color = "#5DADE2"
     elif "snow" in weather:
       weather_message = "Ubierz się cieplej przed wyjściem na zewnątrz"
-      message_color = "#F2F3F4"
-    elif "clear" in weather and temperature_feels_like > 14:
-      weather_message = "Ładna pogoda dla spaceru, treningu lub odpoczynku"
-      message_color = "#82E0AA"
+      message_color = "#EBF5FB"
+    elif "clear" in weather:
+      if temperature_feels_like > 14:
+        weather_message = "Ładna pogoda dla spaceru, treningu lub odpoczynku"
+        message_color = "#82E0AA"
+      else:
+        weather_message = "Ładna pogoda dla spaceru tylko prosimu ubrać się ciepło"
+        message_color = "#82E0AA"
     elif "clouds" in weather:
       if "few clouds" in weather and temperature_feels_like > 14:
         weather_message = "Bardzo dobra pogoda. Możesz pójść na spacer lub zająć się treningiem"
@@ -100,7 +104,7 @@ def dashboard_view(request):
       weather_message = "Widoczność jest ograniczona, zachowaj ostrożność podczas chodzenia na zewnątrz"
       message_color = "#CACFD2"
     elif "tornado" in weather:
-      weather_message = "Zostań się w domu,na zewnątrz jest niebezpieczne"
+      weather_message = "Zostań się w domu, na zewnątrz jest niebezpieczne"
       message_color = "#E74C3C"
   else:
     print(" City Not Found ")
