@@ -54,7 +54,6 @@ def dashboard_view(request):
   ip = get('https://api.ipify.org').text
   response = DbIpCity.get(ip, api_key='free')
   city_name = response.city
-  message = ""
 
   complete_url = base_url + "appid=" + openweathermap_api_key + "&q=" + city_name
   response = requests.get(complete_url)
@@ -70,33 +69,44 @@ def dashboard_view(request):
     current_humidity = json_main["humidity"]
     wind_speed = json_response["wind"]["speed"]
     weather = str(json_weather["main"])
+    weather = weather.lower()
     clouds = json_response["clouds"]["all"]
     if "thunderstorm" in weather:
-      message = ""
+      weather_message = "Prosimy zostać się w domu, nasuwa się burza z piorunami"
+      message_color = "#DE3163"
     elif "drizzle" in weather:
-      message = ""
+      weather_message = "Powstrzymaj się od spacerów i uprawiania sportu, nadchodzi mały deszcz"
+      message_color = "#F9E79F"
     elif "rain" in weather:
-      message = ""
+      weather_message = "Nadchodzi deszcz, radzimy pozostać w domu"
+      message_color = "#5DADE2"
     elif "snow" in weather:
-      message = ""
+      weather_message = "Ubierz się cieplej przed wyjściem na zewnątrz"
+      message_color = "#F2F3F4"
     elif "clear" in weather and temperature_feels_like > 14:
-      message = ""
+      weather_message = "Ładna pogoda dla spaceru, treningu lub odpoczynku"
+      message_color = "#82E0AA"
     elif "clouds" in weather:
-      if "few clouds" in weather:
-        message = ""
+      if "few clouds" in weather and temperature_feels_like > 14:
+        weather_message = "Bardzo dobra pogoda. Możesz pójść na spacer lub zająć się treningiem"
+        message_color = "#ABEBC6"
       else:
-        message = ""
+        weather_message = "Pogoda nie zbyt dobrze pasuje do treningu lub długiego spaceru"
+        message_color = "#F9E79F"
     elif "mist" in weather:
-      message = ""
+      weather_message = "Widoczność jest ograniczona, zachowaj ostrożność podczas chodzenia na zewnątrz"
+      message_color = "#CACFD2"
     elif "fog" in weather:
-      message = ""
+      weather_message = "Widoczność jest ograniczona, zachowaj ostrożność podczas chodzenia na zewnątrz"
+      message_color = "#CACFD2"
     elif "tornado" in weather:
-      message = ""
+      weather_message = "Zostań się w domu,na zewnątrz jest niebezpieczne"
+      message_color = "#E74C3C"
   else:
     print(" City Not Found ")
 
   dashboard_template = "users/dashboard.html"
-  context = {"city_name": city_name, "temperature": current_temperature, "feels_like": temperature_feels_like, "pressure": current_pressure, "humidity": current_humidity, "wind_speed": wind_speed, "message": message,"clouds": clouds}
+  context = {"city_name": city_name, "temperature": current_temperature, "feels_like": temperature_feels_like, "pressure": current_pressure, "humidity": current_humidity, "wind_speed": wind_speed, "clouds": clouds, "message": weather_message, "message_color": message_color}
   return render(request, dashboard_template, context)
 
 
