@@ -9,6 +9,12 @@ from products.models import Calories, Product
 from users.models import Trainer
 from django.core.exceptions import ObjectDoesNotExist
 
+from requests import get
+from ip2geotools.databases.noncommercial import DbIpCity
+import requests, json
+from translate import Translator
+
+openweathermap_api_key = "dd86f6b5b099f8d3b79ea6d6919eecd4"
 
 def login_view(request):
   if request.method == 'POST':
@@ -44,8 +50,36 @@ def logout_view(request):
 
 @login_required
 def dashboard_view(request):
+  base_url = "http://api.openweathermap.org/data/2.5/weather?"
+  ip = get('https://api.ipify.org').text
+  response = DbIpCity.get(ip, api_key='free')
+  city_name = response.city
+  translator = Translator(to_lang="pl")
+
+
+  complete_url = base_url + "appid=" + openweathermap_api_key + "&q=" + city_name
+  response = requests.get(complete_url)
+  json_response = response.json()
+
+  if json_response["cod"] != "404":
+    json_main = json_response["main"]
+    json_weather = json_response["weather"][0]
+
+    current_temperature = int(json_main["temp"]) - 273
+    temperature_feels_like = int(json_main["feels_like"]) - 273
+    current_pressure = json_main["pressure"]
+    current_humidity = json_main["humidity"]
+    wind_speed = json_response["wind"]["speed"]
+    weather = str(json_weather["description"])
+    weather_pl = translator.translate(weather)
+    if "weather condition" in weather_pl:
+      weather_pl = weather_pl.replace("weather condition", "")
+    clouds = json_response["clouds"]["all"]
+  else:
+    print(" City Not Found ")
+
   dashboard_template = "users/dashboard.html"
-  context = {}
+  context = {"city_name": city_name, "temperature": current_temperature, "feels_like": temperature_feels_like, "pressure": current_pressure, "humidity": current_humidity, "wind_speed": wind_speed, "weather": weather_pl,"clouds": clouds}
   return render(request, dashboard_template, context)
 
 
