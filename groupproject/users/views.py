@@ -72,10 +72,10 @@ def dashboard_view(request):
     weather = weather.lower()
     clouds = json_response["clouds"]["all"]
     if "thunderstorm" in weather:
-      weather_message = "Prosimy zostać się w domu, nasuwa się burza z piorunami"
+      weather_message = "Prosimy zostać w domu, nasuwa się burza z piorunami"
       message_color = "#DE3163"
     elif "drizzle" in weather:
-      weather_message = "Powstrzymaj się od spacerów i uprawiania sportu, nadchodzi mały deszcz"
+      weather_message = "Powstrzymaj od spacerów i uprawiania sportu, nadchodzi mały deszcz"
       message_color = "#F9E79F"
     elif "rain" in weather:
       weather_message = "Nadchodzi deszcz, radzimy pozostać w domu"
@@ -85,10 +85,10 @@ def dashboard_view(request):
       message_color = "#EBF5FB"
     elif "clear" in weather:
       if temperature_feels_like > 14:
-        weather_message = "Ładna pogoda dla spaceru, treningu lub odpoczynku"
+        weather_message = "Ładna pogoda do spaceru, treningu lub odpoczynku"
         message_color = "#82E0AA"
       else:
-        weather_message = "Ładna pogoda dla spaceru tylko prosimu ubrać się ciepło"
+        weather_message = "Ładna pogoda na spacer tylko prosimu ubrać się ciepło"
         message_color = "#82E0AA"
     elif "clouds" in weather:
       if "few clouds" in weather and temperature_feels_like > 14:
