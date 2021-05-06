@@ -132,6 +132,7 @@ def articles_view(request):
 @login_required
 def my_calories_view(request):
   message = ""
+  message_color = ""
   user_calories = Calories.objects.filter(user=request.user).order_by("-date")
   product_form = ProductForm()
   calories_form = CaloriesForm()
@@ -144,9 +145,11 @@ def my_calories_view(request):
       try:
         Product.objects.get(name=name.lower(), caloric_content=caloric_content)
         message = "Produkt już istnieje w bazie"
+        message_color = "#FFF3CD"
       except ObjectDoesNotExist:
         Product.objects.create(name=name.lower(), caloric_content=caloric_content)
         message = "Produkt został dodany do bazy"
+        message_color = "#D4EDDA"
     else:
       product_form = ProductForm()
   # Adding products to user list
@@ -160,11 +163,13 @@ def my_calories_view(request):
         db_product = Product.objects.get(name=product)
         Calories.objects.create(user=request.user, product=db_product, weight=weight)
         message = "Produkt został dodany"
+        message_color = "#D4EDDA"
       except ObjectDoesNotExist:
         message = "Produkt nie istnieje w bazie"
+        message_color = "#F8D7DA"
     else:
       calories_form = CaloriesForm()
-  context = {'product_form': product_form, 'user_calories': user_calories, 'calories_form': calories_form, 'message': message}
+  context = {'product_form': product_form, 'user_calories': user_calories, 'calories_form': calories_form, 'message': message, 'message_color': message_color}
   template = "users/user_calories.html"
   return render(request, template, context)
 
