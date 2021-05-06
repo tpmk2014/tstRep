@@ -11,7 +11,7 @@
 <div class="w-75 mx-auto" style="margin: 2% 0 0 0 ;">
 	{% for trainer in trainers %}
 		<div class="" style="background:#81CFD9; padding:10px; border-radius: 6px; margin: 0 0 3% 0; ">
-			<p class="h2" ><img src="https://pics.freeicons.io/uploads/icons/png/6822363841598811069-512.png" alt="{{ trainer.id }}" width="200" height="250">
+			<p class="h2" ><img src="{{ trainer.photo.url }}" alt="{{ trainer.id }}" width="200" height="250">
 				{{ trainer.first_name }} {{ trainer.second_name }} {{ trainer.last_name }} - {{ trainer.occupation }}</p>
 			<p class="h4"><img src="https://img.icons8.com/doodle/48/000000/phone--v1.png"/> {{ trainer.phone_number }}</p>
 			<p class="h4"><img src="https://img.icons8.com/bubbles/50/000000/email.png"/> {{ trainer.email }}</p>
