@@ -76,6 +76,13 @@
 		</div>
 	</div>
 	{% endif %}
+	{% if recommendation != "" %}
+	<div class="d-flex justify-content-center mt-4">
+		<div style="margin:auto; background:{{ message_color }}; width: 70%; text-align: center; padding: 40px; border-radius: 5px;">
+			<h2 class="h2" style="color: grey;">{{ recommendation }}</h2>
+		</div>
+	</div>
+	{% endif %}
 	<div class="d-flex justify-content-center mb-6">
 		<div class="p-2 bd-highlight w-70" style=" {% if user_calories.count < 5 %}margin-bottom: 22%; {% endif %}">
 			{% for calorie_unit in user_calories %}

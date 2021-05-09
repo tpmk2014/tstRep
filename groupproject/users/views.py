@@ -133,6 +133,7 @@ def articles_view(request):
 def my_calories_view(request):
   message = ""
   message_color = ""
+  recommendation = ""
   user_calories = Calories.objects.filter(user=request.user).order_by("-date")
   product_form = ProductForm()
   calories_form = CaloriesForm()
@@ -169,7 +170,7 @@ def my_calories_view(request):
         message_color = "#F8D7DA"
     else:
       calories_form = CaloriesForm()
-  context = {'product_form': product_form, 'user_calories': user_calories, 'calories_form': calories_form, 'message': message, 'message_color': message_color}
+  context = {'product_form': product_form, 'user_calories': user_calories, 'calories_form': calories_form, 'message': message, 'message_color': message_color, 'recommendation': recommendation}
   template = "users/user_calories.html"
   return render(request, template, context)
 
