@@ -1,5 +1,8 @@
+import datetime
+
 from django.contrib.auth import logout, login
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
@@ -170,6 +173,14 @@ def my_calories_view(request):
         message_color = "#F8D7DA"
     else:
       calories_form = CaloriesForm()
+  today_min = datetime.datetime.combine(datetime.date.today(), datetime.time.min)
+  today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
+  try:
+    today_calories = Calories.objects.filter(user=request.user, date__range=(today_min, today_max))
+    today_calories_sum = today_calories.aggregate(Sum('calories_sum'))
+    print(today_calories_sum)
+  except ObjectDoesNotExist:
+    recommendation = ""
   context = {'product_form': product_form, 'user_calories': user_calories, 'calories_form': calories_form, 'message': message, 'message_color': message_color, 'recommendation': recommendation}
   template = "users/user_calories.html"
   return render(request, template, context)
