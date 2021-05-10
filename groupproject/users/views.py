@@ -138,9 +138,9 @@ def my_calories_view(request):
   message = ""
   message_color = ""
   recommendation = ""
-  recommendation_less_list = ["1", "2", "3"]
-  recommendation_normal_list = ["4", "5", "6"]
-  recommendation_more_list = ["7", "8", "9"]
+  recommendation_less_list = ["Spożywasz zbyt dużo kalorii", "Zalecamy przejście na jedzenie o niższej kaloryczności", "Zwróć uwagę na to, co jesz, zawiera za dużo kalorii"]
+  recommendation_normal_list = ["Spożywasz dostateczną ilość kalorii", "Doskonale przestrzegasz diety", "Czieszymy się że spożywasz odpowiednią liczbę kalorii"]
+  recommendation_more_list = ["Powinieneś jeść więcej wysokokalorycznych potraw", "Musisz spożywać więcej kalorii", "Zalecamy spożywanie większej ilości kalorii"]
   daily_norm_min = 1700
   daily_norm_max = 2600
   user_calories = Calories.objects.filter(user=request.user).order_by("-date")
@@ -179,14 +179,13 @@ def my_calories_view(request):
         message_color = "#F8D7DA"
     else:
       calories_form = CaloriesForm()
-      
+
   today_min = datetime.datetime.combine(datetime.date.today(), datetime.time.min)
   today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
   try:
-    today_calories_sum = 0
     today_calories = Calories.objects.filter(user=request.user, date__range=(today_min, today_max))
     today_calories_sum_dict = today_calories.aggregate(Sum('calories_sum'))
-    today_calories_sum_dict.get("calories_sum__sum", today_calories_sum)
+    today_calories_sum = today_calories_sum_dict.get("calories_sum__sum")
     if today_calories_sum >= daily_norm_min and today_calories_sum <= daily_norm_max:
       recommendation = recommendation_message(recommendation_normal_list)
     elif today_calories_sum < daily_norm_min:
@@ -201,7 +200,8 @@ def my_calories_view(request):
 
 
 def recommendation_message(list):
-  random_recommendation_index = random.randint(0, len(list))
+  list_len = len(list) - 1
+  random_recommendation_index = random.randint(0, list_len)
   recommendation = list[random_recommendation_index]
   return recommendation
 
