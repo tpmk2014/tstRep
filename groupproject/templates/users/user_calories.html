@@ -76,6 +76,13 @@
 		</div>
 	</div>
 	{% endif %}
+	{% if recommendation != "" %}
+	<div class="d-flex justify-content-center mt-4">
+		<div style="margin:auto; background: #D1ECF1; width: 70%; text-align: center; padding: 40px; border-radius: 5px;">
+			<h2 class="h2" style="color: grey;">{{ recommendation }}</h2>
+		</div>
+	</div>
+	{% endif %}
 	<div class="d-flex justify-content-center mb-6">
 		<div class="p-2 bd-highlight w-70" style=" {% if user_calories.count < 5 %}margin-bottom: 22%; {% endif %}">
 			{% for calorie_unit in user_calories %}
@@ -88,7 +95,7 @@
 						<h3 style="">{{ calorie_unit.weight }}g</h3>
 					</div>
 					<div class="form-group col mb-0">
-						<h3 style="">{{ calorie_unit.calories_sum }}k</h3>
+						<h3 style="">{{ calorie_unit.calories_sum }}Kcal</h3>
 					</div>
 					<div class="form-group col mb-0">
 						<h3 style="">{{ calorie_unit.date }}k</h3>
