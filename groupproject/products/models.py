@@ -25,6 +25,6 @@ class Calories(models.Model):
 
   def save(self, *args, **kwargs):
     caloric_value = Product.objects.get(name=self.product).caloric_content
-    self.calories_sum = str(int(caloric_value) * int(self.weight))
+    self.calories_sum = int(int(caloric_value) * int(self.weight) / 100)
     self.date = timezone.now()
     super(Calories, self).save(*args, **kwargs)

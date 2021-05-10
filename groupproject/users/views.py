@@ -1,5 +1,9 @@
+import datetime
+import random
+
 from django.contrib.auth import logout, login
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
@@ -133,6 +137,12 @@ def articles_view(request):
 def my_calories_view(request):
   message = ""
   message_color = ""
+  recommendation = ""
+  recommendation_less_list = ["Spożywasz zbyt dużo kalorii", "Zalecamy przejście na jedzenie o niższej kaloryczności", "Zwróć uwagę na to, co jesz, zawiera za dużo kalorii"]
+  recommendation_normal_list = ["Spożywasz dostateczną ilość kalorii", "Doskonale przestrzegasz diety", "Czieszymy się że spożywasz odpowiednią liczbę kalorii"]
+  recommendation_more_list = ["Powinieneś jeść więcej wysokokalorycznych potraw", "Musisz spożywać więcej kalorii", "Zalecamy spożywanie większej ilości kalorii"]
+  daily_norm_min = 1700
+  daily_norm_max = 2600
   user_calories = Calories.objects.filter(user=request.user).order_by("-date")
   product_form = ProductForm()
   calories_form = CaloriesForm()
@@ -169,9 +179,31 @@ def my_calories_view(request):
         message_color = "#F8D7DA"
     else:
       calories_form = CaloriesForm()
-  context = {'product_form': product_form, 'user_calories': user_calories, 'calories_form': calories_form, 'message': message, 'message_color': message_color}
+
+  today_min = datetime.datetime.combine(datetime.date.today(), datetime.time.min)
+  today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
+  try:
+    today_calories = Calories.objects.filter(user=request.user, date__range=(today_min, today_max))
+    today_calories_sum_dict = today_calories.aggregate(Sum('calories_sum'))
+    today_calories_sum = today_calories_sum_dict.get("calories_sum__sum")
+    if today_calories_sum >= daily_norm_min and today_calories_sum <= daily_norm_max:
+      recommendation = recommendation_message(recommendation_normal_list)
+    elif today_calories_sum < daily_norm_min:
+      recommendation = recommendation_message(recommendation_more_list)
+    elif today_calories_sum > daily_norm_max:
+      recommendation = recommendation_message(recommendation_less_list)
+  except ObjectDoesNotExist:
+    recommendation = ""
+  context = {'product_form': product_form, 'user_calories': user_calories, 'calories_form': calories_form, 'message': message, 'message_color': message_color, 'recommendation': recommendation}
   template = "users/user_calories.html"
   return render(request, template, context)
+
+
+def recommendation_message(list):
+  list_len = len(list) - 1
+  random_recommendation_index = random.randint(0, list_len)
+  recommendation = list[random_recommendation_index]
+  return recommendation
 
 
 @login_required
