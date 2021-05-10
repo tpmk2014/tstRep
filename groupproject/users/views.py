@@ -1,4 +1,5 @@
 import datetime
+import random
 
 from django.contrib.auth import logout, login
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -137,6 +138,11 @@ def my_calories_view(request):
   message = ""
   message_color = ""
   recommendation = ""
+  recommendation_less_list = ["1", "2", "3"]
+  recommendation_normal_list = ["4", "5", "6"]
+  recommendation_more_list = ["7", "8", "9"]
+  daily_norm_min = 1700
+  daily_norm_max = 2600
   user_calories = Calories.objects.filter(user=request.user).order_by("-date")
   product_form = ProductForm()
   calories_form = CaloriesForm()
@@ -173,17 +179,31 @@ def my_calories_view(request):
         message_color = "#F8D7DA"
     else:
       calories_form = CaloriesForm()
+      
   today_min = datetime.datetime.combine(datetime.date.today(), datetime.time.min)
   today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
   try:
+    today_calories_sum = 0
     today_calories = Calories.objects.filter(user=request.user, date__range=(today_min, today_max))
-    today_calories_sum = today_calories.aggregate(Sum('calories_sum'))
-    print(today_calories_sum)
+    today_calories_sum_dict = today_calories.aggregate(Sum('calories_sum'))
+    today_calories_sum_dict.get("calories_sum__sum", today_calories_sum)
+    if today_calories_sum >= daily_norm_min and today_calories_sum <= daily_norm_max:
+      recommendation = recommendation_message(recommendation_normal_list)
+    elif today_calories_sum < daily_norm_min:
+      recommendation = recommendation_message(recommendation_more_list)
+    elif today_calories_sum > daily_norm_max:
+      recommendation = recommendation_message(recommendation_less_list)
   except ObjectDoesNotExist:
     recommendation = ""
   context = {'product_form': product_form, 'user_calories': user_calories, 'calories_form': calories_form, 'message': message, 'message_color': message_color, 'recommendation': recommendation}
   template = "users/user_calories.html"
   return render(request, template, context)
+
+
+def recommendation_message(list):
+  random_recommendation_index = random.randint(0, len(list))
+  recommendation = list[random_recommendation_index]
+  return recommendation
 
 
 @login_required
