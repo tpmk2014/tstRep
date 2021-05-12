@@ -185,7 +185,10 @@ def my_calories_view(request):
   try:
     today_calories = Calories.objects.filter(user=request.user, date__range=(today_min, today_max))
     today_calories_sum_dict = today_calories.aggregate(Sum('calories_sum'))
-    today_calories_sum = today_calories_sum_dict.get("calories_sum__sum")
+    try:
+      today_calories_sum = int(today_calories_sum_dict.get("calories_sum__sum"))
+    except TypeError:
+      today_calories_sum = 0
     if today_calories_sum >= daily_norm_min and today_calories_sum <= daily_norm_max:
       recommendation = recommendation_message(recommendation_normal_list)
     elif today_calories_sum < daily_norm_min:
