@@ -19,8 +19,9 @@ v 1.1-1.2
 - added page Regulations / Terms of Use page
 - possibility to add own products to the database
 - links to article categories at the top of the index page
-- created BMI calculator v 1.0
+- created BMI calculator v 1.0 <br>
 v 1.3
 - added possibility to change user password
 - added page O-nas
 - added messages in Moje kalorie
+- Added forecast on user dashboard
