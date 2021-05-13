@@ -1,8 +1,8 @@
 import datetime
 import random
 
-from django.contrib.auth import logout, login
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import logout, login, update_session_auth_hash
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -211,6 +211,16 @@ def recommendation_message(list):
 
 @login_required
 def change_user_password_view(request):
-  context = {}
+  if request.method == 'POST':
+    form = PasswordChangeForm(request.user, request.POST)
+    if form.is_valid():
+      user = form.save()
+      update_session_auth_hash(request, user)  # Important!
+      return redirect('users:change_password')
+    else:
+      form = PasswordChangeForm()
+  else:
+    form = PasswordChangeForm(request.user)
+  context = {'form': form}
   template = "users/change_password.html"
   return render(request, template, context)
