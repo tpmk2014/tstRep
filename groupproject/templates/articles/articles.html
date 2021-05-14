@@ -1,6 +1,16 @@
+{% extends "pages/base_index.html" %}
 {% load static %}
 {% block content %}
-<div class="flex">
+<div class="flex col-md-10 mx-auto py-11">
+    {% for a in article %}
+    <p class="h2 text-center">  {{ a.title }} </p>
+    <p class="h3 text-center">    {{ a.author }} </p>
+    <p class="h5 text-center">    {{ a.description }} </p>
+    <br>
+    <br>
+    <br>
+    <br>
+    {% endfor %}
 
 </div>
 {% endblock %}
